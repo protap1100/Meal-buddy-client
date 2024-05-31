@@ -7,12 +7,15 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
   const axiosPublic = useAxiosPublic();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const [regSuccess, setRegSuccess] = useState("");
   const {
     register,
     handleSubmit,
@@ -26,35 +29,76 @@ const Register = () => {
     const password = data.password;
     const photoUrl = data.photoUrl;
     console.log(name, email, photoUrl, password);
-    createUser(email, password)
-      .then((result) => {
-        console.log(result.user, "user");
-        updateUserProfile(name, photoUrl)
-          .then(() => {
-            const userInfo = {
-              name: data.name,
-              email: data.email,
-            };
-            axiosPublic.post("/users", userInfo).then((res) => {
-              console.log("user added to the database");
-              if (res.data.insertedId) {
-                reset();
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "User Created Successfully",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                navigate("/");
-              }
-            });
-          })
-          .catch((error) => console.log(error));
-      })
-      .then((error) => {
-        console.log(error);
-      });
+
+    if (!/(?=.*[a-z])/.test(password)) {
+      setRegSuccess("");
+      toast.error('Password must contain at least one lowercase letter', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+      return;
+    } else if (!/(?=.*[A-Z])/.test(password)) {
+      setRegSuccess("");
+      toast.error('Password must contain at least one uppercase letter', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    } else if (password.length < 6) {
+      setRegSuccess("");
+      toast.error('Password must be 6 character or higher', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    } else {
+      createUser(email, password)
+        .then((result) => {
+          console.log(result.user, "user");
+          updateUserProfile(name, photoUrl)
+            .then(() => {
+              const userInfo = {
+                name: data.name,
+                email: data.email,
+                badge: "Bronze",
+              };
+              axiosPublic.post("/users", userInfo).then((res) => {
+                console.log("user added to the database");
+                if (res.data.insertedId) {
+                  reset();
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "User Created Successfully",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  navigate("/");
+                }
+              });
+            })
+            .catch((error) => console.log(error));
+        })
+        .then((error) => {
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -136,8 +180,8 @@ const Register = () => {
                   )}
                 </span>
                 {errors.name && (
-                <span className="text-red-600">Enter Your Photo Please</span>
-              )}
+                  <span className="text-red-600">Enter Your Photo Please</span>
+                )}
               </div>
             </div>
             <label className="label">
@@ -154,6 +198,7 @@ const Register = () => {
               </button>
             </div>
           </form>
+          <span>{regSuccess}</span>
           <div className="text-center">
             Already Have An Account
             <Link className="font-bold text-green-500" to="/login">

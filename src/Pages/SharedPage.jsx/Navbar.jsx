@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/Logo/Logo1.png";
 import useAuth from "../../Hooks/useAuth";
-
+import Loading from "../../Others/Loading";
+import { Tooltip as Tooltip } from "react-tooltip";
+import Swal from "sweetalert2";
+import { FaUser } from "react-icons/fa";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, loading, logOut } = useAuth();
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -18,6 +22,22 @@ const Navbar = () => {
     { id: 1, path: "/", name: "Home" },
     { id: 2, path: "/meals", name: "Meals" },
   ];
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        Swal.fire({
+          title: "Logout Successful",
+          text: "You Have Successfully Logged Out",
+          icon: "success",
+        });
+        navigate(location?.state ? location.state : "/");
+      })
+      .then((error) => console.log(error));
+  };
+
+  loading && <Loading />;
+  // loading && <p>loading.....</p>
 
   return (
     <div className="fixed w-full h-16 mx-auto container bg-white shadow-md z-50">
@@ -68,11 +88,10 @@ const Navbar = () => {
             ))}
           </ul>
         </div>
-        <div className="font-bold flex gap-5 items-center">
-          <div>
+        <div className="font-bold flex gap-5 justify-center items-center">
+          <div className="flex items-center justify-center">
             {user ? (
               <>
-                {" "}
                 <div className="dropdown dropdown-bottom dropdown-end">
                   <div tabIndex={0} role="button" className="text-2xl">
                     <GiHamburgerMenu></GiHamburgerMenu>
@@ -85,7 +104,7 @@ const Navbar = () => {
                       <a>Item 1</a>
                     </li>
                     <li>
-                      <a>Item 2</a>
+                      <button onClick={handleLogout}>Logout</button>
                     </li>
                   </ul>
                 </div>
@@ -101,6 +120,27 @@ const Navbar = () => {
               </>
             )}
           </div>
+          {user && (
+            <div className="">
+              <Tooltip id="my-tooltip"> </Tooltip>
+              <a
+                data-tooltip-id="my-tooltip"
+                data-tooltip-content={user?.displayName}
+              >
+                {user.displayURL ? (
+                  <img
+                    src={user?.photoURL}
+                    className="w-8 h-8 rounded"
+                    alt=""
+                  />
+                ) : (
+                  <div className="text-xl text-blue-500 rounded-xl">
+                    <FaUser></FaUser>
+                  </div>
+                )}
+              </a>
+            </div>
+          )}
         </div>
       </nav>
     </div>

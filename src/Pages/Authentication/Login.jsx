@@ -6,6 +6,8 @@ import loginImg from "../../assets/Authentications_image/Login.jpg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -27,11 +29,16 @@ const Login = () => {
         Swal.fire({
           title: "Login Successful",
           text: "Login Successful",
-          icon: "question",
+          icon: "success",
         });
         navigate(location?.state ? location.state : "/");
       })
-      .then((error) => console.log(error));
+      .catch(()=>{
+        // console.log(error,'Kaj Hocche na ')
+        toast.error('Wrong Password or Email Please Try again')
+        // setErrorMessage(error.message)
+      })
+     
   };
 
   return (
@@ -101,8 +108,7 @@ const Login = () => {
           <div className="text-center">
             Want to Join Us?
             <Link className="font-bold text-green-500" to="/register">
-              {" "}
-              Register{" "}
+               Register
             </Link>
           </div>
         </div>
