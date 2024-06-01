@@ -1,6 +1,7 @@
 import { Rating } from "@smastrom/react-rating";
 import { FaComment, FaThumbsUp } from "react-icons/fa";
 import "@smastrom/react-rating/style.css";
+import { Link } from "react-router-dom";
 const MealsCard = ({ item }) => {
   return (
     <div
@@ -21,7 +22,7 @@ const MealsCard = ({ item }) => {
           {<Rating readOnly value={item.rating} key={item.rating} />}
         </div>
         <div className=" my-2 p-1 bg-blue-100 rounded absolute bottom-0 right-2">
-            <h1 className="text-xl">{item.category}</h1>
+          <h1 className="text-xl">{item.category}</h1>
         </div>
       </div>
       <div className="text-left">
@@ -66,10 +67,16 @@ const MealsCard = ({ item }) => {
           ))}
         </div>
       </div>
-      <div>
+      <div className="flex gap-5 justify-center">
         <button className="text-center mt-3 p-2 border-b-4 border-orange-200 hover:bg-orange-200 hover:text-white rounded-xl my-2 hover:border-orange-300 transition-all duration-700 ease-in-out">
           Add to Cart
         </button>
+        <Link
+          to={`/meals/${item._id}`}
+          className="text-center mt-3 p-2 border-b-4 border-blue-200 hover:bg-blue-200 hover:text-white rounded-xl my-2 hover:border-blue-300 transition-all duration-700 ease-in-out"
+        >
+          See Details
+        </Link>
       </div>
     </div>
   );
