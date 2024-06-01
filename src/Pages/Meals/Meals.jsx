@@ -10,9 +10,9 @@ const Meals = () => {
   const Breakfast = meal.filter((item) => item.category === "Breakfast");
   const Lunch = meal.filter((item) => item.category === "Lunch");
   const dinner = meal.filter((item) => item.category === "Dinner");
-  console.log(dinner);
-  console.log(Breakfast);
-  console.log(Lunch);
+  // console.log(dinner);
+  // console.log(Breakfast);
+  // console.log(Lunch);
 
   loading && <Loading></Loading>;
 
