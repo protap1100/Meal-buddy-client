@@ -67,7 +67,7 @@ const MealsCard = ({ item }) => {
         </div>
       </div>
       <div>
-        <button className="text-center mt-3 p-2 border-b-4 border-orange-200 hover:bg-orange-200 hover:text-white rounded-xl my-2">
+        <button className="text-center mt-3 p-2 border-b-4 border-orange-200 hover:bg-orange-200 hover:text-white rounded-xl my-2 hover:border-orange-300 transition-all duration-700 ease-in-out">
           Add to Cart
         </button>
       </div>

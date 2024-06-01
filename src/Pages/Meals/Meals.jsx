@@ -40,7 +40,7 @@ const Meals = ({ limit,children }) => {
           </TabPanel>
         </Tabs>
       </div>
-      {children && <div className="mt-5 text-center">{children}</div>}
+      {children && <div className="my-10 text-center">{children}</div>}
     </div>
   );
 };
