@@ -1,7 +1,9 @@
+import Meals from "../Meals/Meals";
+
 const Home = () => {
     return (
         <div>
-            <h1>Home</h1>
+            <Meals></Meals>
         </div>
     );
 };

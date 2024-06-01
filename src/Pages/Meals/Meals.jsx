@@ -25,10 +25,14 @@ const Meals = () => {
       <div className="mt-10 text-center">
         <Tabs>
           <TabList>
+            <Tab>All Meals</Tab>
             <Tab>Breakfast</Tab>
             <Tab>Lunch</Tab>
             <Tab>Dinner</Tab>
           </TabList>
+          <TabPanel>
+            <MealsCategory items={meal}></MealsCategory>
+          </TabPanel>
           <TabPanel>
             <MealsCategory items={Breakfast}></MealsCategory>
           </TabPanel>

@@ -1,10 +1,10 @@
+import MealsCard from "./MealsCard";
+
 const MealsCategory = ({ items }) => {
   return (
-    <div>
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10">
       {items.map((item) => (
-        <div key={item._id}>
-            {item.title}
-        </div>
+        <MealsCard key={item._id} item={item}></MealsCard>
       ))}
     </div>
   );

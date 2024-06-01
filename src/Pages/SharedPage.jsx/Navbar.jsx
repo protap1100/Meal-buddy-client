@@ -21,6 +21,7 @@ const Navbar = () => {
   const router = [
     { id: 1, path: "/", name: "Home" },
     { id: 2, path: "/meals", name: "Meals" },
+    { id: 2, path: "/upcomingMeals", name: "Upcoming Meals" },
   ];
 
   const handleLogout = () => {
