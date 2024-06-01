@@ -72,7 +72,7 @@ const MealsCard = ({ item }) => {
           Add to Cart
         </button>
         <Link
-          to={`/meals/${item._id}`}
+          to={`/mealDetails/${item._id}`}
           className="text-center mt-3 p-2 border-b-4 border-blue-200 hover:bg-blue-200 hover:text-white rounded-xl my-2 hover:border-blue-300 transition-all duration-700 ease-in-out"
         >
           See Details
