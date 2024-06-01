@@ -5,23 +5,19 @@ import Loading from "../../Others/Loading";
 import SectionTitle from "../../Components/Shared/SectionTitle";
 import MealsCategory from "./MealsCategory";
 
-const Meals = () => {
-  const [meal, loading, ,] = useMeals();
+const Meals = ({ limit,children }) => {
+  const [meal, loading] = useMeals();
   const Breakfast = meal.filter((item) => item.category === "Breakfast");
   const Lunch = meal.filter((item) => item.category === "Lunch");
   const dinner = meal.filter((item) => item.category === "Dinner");
-  // console.log(dinner);
-  // console.log(Breakfast);
-  // console.log(Lunch);
 
-  loading && <Loading></Loading>;
+  if (loading) return <Loading />;
+
+  const displayedMeals = meal.slice(0, limit);
 
   return (
     <div>
-      <SectionTitle
-        heading="Our Menu"
-        subHeading="Choose Your Favorite Food"
-      ></SectionTitle>
+      <SectionTitle heading="Our Menu" subHeading="Choose Your Favorite Food" />
       <div className="mt-10 text-center">
         <Tabs>
           <TabList>
@@ -31,19 +27,20 @@ const Meals = () => {
             <Tab>Dinner</Tab>
           </TabList>
           <TabPanel>
-            <MealsCategory items={meal}></MealsCategory>
+            <MealsCategory items={displayedMeals} />
           </TabPanel>
           <TabPanel>
-            <MealsCategory items={Breakfast}></MealsCategory>
+            <MealsCategory items={Breakfast} />
           </TabPanel>
           <TabPanel>
-            <MealsCategory items={Lunch}></MealsCategory>
+            <MealsCategory items={Lunch} />
           </TabPanel>
           <TabPanel>
-            <MealsCategory items={dinner}></MealsCategory>
+            <MealsCategory items={dinner} />
           </TabPanel>
         </Tabs>
       </div>
+      {children && <div className="mt-5 text-center">{children}</div>}
     </div>
   );
 };

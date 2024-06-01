@@ -64,9 +64,9 @@ const Navbar = () => {
                 : "-translate-x-full md:translate-x-0"
             }`}
           >
-            {router.map((route) => (
+            {router.map((route,index) => (
               <li
-                key={route.id}
+                key={index}
                 className={`md:border-none ${open ? "mt-4" : "mt-0"}`}
               >
                 <NavLink
@@ -102,7 +102,7 @@ const Navbar = () => {
                     className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32"
                   >
                     <li>
-                      <a>Item 1</a>
+                      <a>Dashboard</a>
                     </li>
                     <li>
                       <button onClick={handleLogout}>Logout</button>
