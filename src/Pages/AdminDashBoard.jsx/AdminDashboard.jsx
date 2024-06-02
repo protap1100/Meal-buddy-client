@@ -8,11 +8,11 @@ const AdminDashboard = () => {
     <div>
         <AdminTopbar></AdminTopbar>
     </div>
-      <div className=" flex gap-5">
-        <div className="w-1/4">
+      <div className="mt-5 flex gap-5">
+        <div className="w-1/6">
           <AdminNavbar></AdminNavbar>
         </div>
-        <div className="w-3/4 bg-blue-400">
+        <div className="w-5/6 bg-blue-50">
           <Outlet></Outlet>
         </div>
       </div>

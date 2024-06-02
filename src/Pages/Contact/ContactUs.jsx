@@ -8,16 +8,25 @@ import { useEffect } from "react";
 // import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import SectionTitle from "../../Components/Shared/SectionTitle";
+import useAuth from "../../Hooks/useAuth";
 
 const ContactUs = () => {
+  const { user } = useAuth();
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
+    const customData = {
+      ...data,
+      userEmail: user?.email,
+      userPhoto: user?.photoURL,
+      userName: user?.displayName,
+      date: new Date()
+    };
     fetch("http://localhost:5000/contact", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(customData),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -145,7 +154,7 @@ const ContactUs = () => {
                 ></textarea>
               </div>
             </div>
-            <div className="px-10" >
+            <div className="px-10">
               <button
                 type="submit"
                 className="text-center mt-3 p-2 border-b-4 bg-blue-400 border-blue-400 w-full hover:bg-blue-200 text-white rounded-xl my-2 hover:border-blue-300 transition-all duration-700 ease-in-out"

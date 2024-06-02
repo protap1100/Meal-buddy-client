@@ -26,7 +26,7 @@ const AdminNavbar = () => {
               : "mt-3 transition-all duration-700 ease-in-out  bg-violet-200  p-2 rounded-xl hover:bg-violet-300 border-b-2 border-black"
           }
         >
-          Messages
+          Feedback
         </NavLink>
 
         <NavLink
