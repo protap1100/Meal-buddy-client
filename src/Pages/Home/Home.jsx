@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import Membership from "../../Components/Membership/Membership";
 import Meals from "../Meals/Meals";
-import Footer from "../SharedPage.jsx/Footer";
 import Banner from "./Banner";
 
 const Home = () => {
@@ -17,7 +16,6 @@ const Home = () => {
         </Link>
       </Meals>
       <Membership></Membership>
-      <Footer></Footer>
     </div>
   );
 };

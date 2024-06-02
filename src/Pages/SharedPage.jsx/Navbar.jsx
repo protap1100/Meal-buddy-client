@@ -22,6 +22,7 @@ const Navbar = () => {
     { id: 1, path: "/", name: "Home" },
     { id: 2, path: "/meals", name: "Meals" },
     { id: 2, path: "/upcomingMeals", name: "Upcoming Meals" },
+    { id: 2, path: "/contactUs", name: "Contact" },
   ];
 
   const handleLogout = () => {
@@ -102,7 +103,7 @@ const Navbar = () => {
                     className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32"
                   >
                     <li>
-                      <a>Dashboard</a>
+                      <Link to='/dashboard'>DashBoard</Link>
                     </li>
                     <li>
                       <Link to='/myProfile'>About Me</Link>

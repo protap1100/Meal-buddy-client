@@ -10,6 +10,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+import 'aos/dist/aos.css';
 
 const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
