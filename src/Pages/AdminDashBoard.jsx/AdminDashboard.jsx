@@ -6,7 +6,7 @@ const AdminDashboard = () => {
   return (
     <>
     <div>
-        <AdminTopbar></AdminTopbar>
+    <AdminTopbar></AdminTopbar>
     </div>
       <div className="mt-5 flex gap-5">
         <div className="w-1/6">

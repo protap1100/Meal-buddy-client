@@ -7,6 +7,7 @@ import { FaComment, FaThumbsUp } from "react-icons/fa";
 import { Rating } from "@smastrom/react-rating";
 import { Controller, useForm } from "react-hook-form";
 import "@smastrom/react-rating/style.css";
+// import EmojiPicker from "emoji-picker-react";
 
 const MealsDetails = () => {
   const axiosPublic = useAxiosPublic();
@@ -65,67 +66,69 @@ const MealsDetails = () => {
             : "bg-red-100"
         } p-10 mt-5 rounded flex w-[900px] items-center mx-auto justify-center`}
       >
-       <div>
-       <div className="relative ">
-          <img className=" rounded" src={image} alt="" />
-          <h1 className="bg-black text-white p-2 rounded-xl absolute top-2 right-2">
-            {price}
-          </h1>
-          <div className="w-40 my-2 absolute bottom-0">
-            {<Rating readOnly value={rating} key={rating} />}
-          </div>
-          <div className=" my-2 p-1 bg-blue-100 rounded absolute bottom-0 right-2">
-            <h1 className="text-xl">{category}</h1>
-          </div>
-        </div>
-        <div className="text-left">
-          <div className="mt-2 flex gap-20">
-            <div className="flex items-center gap-2">
-              <h1 className="text-blue-500 cursor-pointer">
-                <FaThumbsUp></FaThumbsUp>
-              </h1>
-              <h1>
-                {likes} {likes > 0 ? "Likes" : "Like"}{" "}
-              </h1>
+        <div>
+          <div className="relative ">
+            <img className=" rounded" src={image} alt="" />
+            <h1 className="bg-black text-white p-2 rounded-xl absolute top-2 right-2">
+              {price}
+            </h1>
+            <div className="w-40 my-2 absolute bottom-0">
+              {<Rating readOnly value={rating} key={rating} />}
             </div>
-            <div className="flex items-center gap-3 ">
-              <h1>
-                <FaComment></FaComment>
-              </h1>
-              <h1>
-                {reviews} {reviews > 0 ? "Reviews" : "Review"}
-              </h1>
+            <div className=" my-2 p-1 bg-blue-100 rounded absolute bottom-0 right-2">
+              <h1 className="text-xl">{category}</h1>
             </div>
           </div>
-          <h1 className="font-bold text-orange-500">Added Time: {post_time}</h1>
-          <div>
-            <h1 className="text-xl font-bold text-left mt-2">{title}</h1>
-            <h1>{description}</h1>
-          </div>
-          <h1 className="text-xl font-bold"> Ingredients </h1>
-          <div
-            className={`${
-              category === "Breakfast"
-                ? "text-red-600"
-                : category === "Lunch"
-                ? "text-green-600"
-                : "text-blue-600"
-            }
+          <div className="text-left">
+            <div className="mt-2 flex gap-20">
+              <div className="flex items-center gap-2">
+                <h1 className="text-blue-500 cursor-pointer">
+                  <FaThumbsUp></FaThumbsUp>
+                </h1>
+                <h1>
+                  {likes} {likes > 0 ? "Likes" : "Like"}{" "}
+                </h1>
+              </div>
+              <div className="flex items-center gap-3 ">
+                <h1>
+                  <FaComment></FaComment>
+                </h1>
+                <h1>
+                  {reviews} {reviews > 0 ? "Reviews" : "Review"}
+                </h1>
+              </div>
+            </div>
+            <h1 className="font-bold text-orange-500">
+              Added Time: {post_time}
+            </h1>
+            <div>
+              <h1 className="text-xl font-bold text-left mt-2">{title}</h1>
+              <h1>{description}</h1>
+            </div>
+            <h1 className="text-xl font-bold"> Ingredients </h1>
+            <div
+              className={`${
+                category === "Breakfast"
+                  ? "text-red-600"
+                  : category === "Lunch"
+                  ? "text-green-600"
+                  : "text-blue-600"
+              }
           grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2  text-red-800`}
-          >
-            {ingredients.map((ingredient, index) => (
-              <h1 key={index}>
-                {index + 1}. {ingredient}
-              </h1>
-            ))}
+            >
+              {ingredients.map((ingredient, index) => (
+                <h1 key={index}>
+                  {index + 1}. {ingredient}
+                </h1>
+              ))}
+            </div>
+          </div>
+          <div className="flex gap-5 justify-center">
+            <button className="text-center mt-3 p-2 border-b-4 border-orange-200 hover:bg-orange-200 hover:text-white rounded-xl my-2 hover:border-orange-300 transition-all duration-700 ease-in-out">
+              Request Meal
+            </button>
           </div>
         </div>
-        <div className="flex gap-5 justify-center">
-          <button className="text-center mt-3 p-2 border-b-4 border-orange-200 hover:bg-orange-200 hover:text-white rounded-xl my-2 hover:border-orange-300 transition-all duration-700 ease-in-out">
-            Request Meal
-          </button>
-        </div>
-       </div>
         <form
           className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg"
           onSubmit={handleSubmit(onSubmit)}
@@ -199,7 +202,9 @@ const MealsDetails = () => {
               </div>
             )}
           </div>
-
+          {/* <div>
+            <EmojiPicker open={true} emojiStyle='apple' />
+          </div> */}
           <button
             type="submit"
             className="w-full text-center mt-3 p-2 border-b-4 border-orange-200 hover:bg-orange-200 hover:text-white rounded-xl my-2 hover:border-orange-300 transition-all duration-700 ease-in-out"
