@@ -105,6 +105,9 @@ const Navbar = () => {
                       <a>Dashboard</a>
                     </li>
                     <li>
+                      <Link to='/myProfile'>About Me</Link>
+                    </li>
+                    <li>
                       <button onClick={handleLogout}>Logout</button>
                     </li>
                   </ul>
@@ -128,7 +131,7 @@ const Navbar = () => {
                 data-tooltip-id="my-tooltip"
                 data-tooltip-content={user?.displayName}
               >
-                {user.displayURL ? (
+                {user ? (
                   <img
                     src={user?.photoURL}
                     className="w-8 h-8 rounded"

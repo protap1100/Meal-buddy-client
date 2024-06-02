@@ -8,7 +8,8 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -32,7 +33,7 @@ const Register = () => {
 
     if (!/(?=.*[a-z])/.test(password)) {
       setRegSuccess("");
-      toast.error('Password must contain at least one lowercase letter', {
+      toast.error("Password must contain at least one lowercase letter", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -41,11 +42,11 @@ const Register = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
       return;
     } else if (!/(?=.*[A-Z])/.test(password)) {
       setRegSuccess("");
-      toast.error('Password must contain at least one uppercase letter', {
+      toast.error("Password must contain at least one uppercase letter", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -54,10 +55,10 @@ const Register = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
     } else if (password.length < 6) {
       setRegSuccess("");
-      toast.error('Password must be 6 character or higher', {
+      toast.error("Password must be 6 character or higher", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -66,7 +67,7 @@ const Register = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
     } else {
       createUser(email, password)
         .then((result) => {
@@ -196,6 +197,9 @@ const Register = () => {
               >
                 Sign Up
               </button>
+              <div className="mt-2">
+                <SocialLogin></SocialLogin>
+              </div>
             </div>
           </form>
           <span>{regSuccess}</span>

@@ -7,6 +7,7 @@ import Login from "../Pages/Authentication/Login";
 import Meals from "../Pages/Meals/Meals";
 import UpcomingMeals from "../Pages/UpcomingMeals/UpcomingMeals";
 import MealsDetails from "../Pages/Meals/MealsDetails";
+import UpdateProfile from "../Pages/Authentication/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: '/login',
         element : <Login></Login>
+      },
+      {
+        path: '/myProfile',
+        element : <UpdateProfile></UpdateProfile>
       },
       {
         path:'/meals',

@@ -7,7 +7,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -33,12 +34,11 @@ const Login = () => {
         });
         navigate(location?.state ? location.state : "/");
       })
-      .catch(()=>{
+      .catch(() => {
         // console.log(error,'Kaj Hocche na ')
-        toast.error('Wrong Password or Email Please Try again')
+        toast.error("Wrong Password or Email Please Try again");
         // setErrorMessage(error.message)
-      })
-     
+      });
   };
 
   return (
@@ -103,12 +103,15 @@ const Login = () => {
               <button className="p-2 bg-button hover:bg-hover text-white font-bold rounded">
                 Login In
               </button>
+              <div className="mt-2">
+                <SocialLogin></SocialLogin>
+              </div>
             </div>
           </form>
           <div className="text-center">
             Want to Join Us?
             <Link className="font-bold text-green-500" to="/register">
-               Register
+              Register
             </Link>
           </div>
         </div>
