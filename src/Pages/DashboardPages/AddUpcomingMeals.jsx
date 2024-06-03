@@ -11,7 +11,7 @@ const image_hosting_key = import.meta.env.VITE_IMBB_API_URL;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 console.log(image_hosting_api);
 
-const AddMeals = () => {
+const AddUpcomingMeals = () => {
   const { user } = useAuth();
   const {
     register,
@@ -38,7 +38,6 @@ const AddMeals = () => {
         "content-Type": "multipart/form-data",
       },
     });
-    const createdAt = new Date();
     if (res.data.success) {
       const mealsItem = {
         title: data.title,
@@ -52,9 +51,9 @@ const AddMeals = () => {
         ingredients: data.ingredients,
         name: user.displayName,
         email: user.email,
-        createdAt: createdAt,
+        createdAt: new Date(),
       };
-      const menuRes = await axiosPublic.post("/meals", mealsItem);
+      const menuRes = await axiosPublic.post("/upcomingMeals", mealsItem);
       console.log(menuRes.data);
       console.log("With Image Url", res.data);
       if (menuRes.data.insertedId) {
@@ -192,4 +191,5 @@ const AddMeals = () => {
   );
 };
 
-export default AddMeals;
+export default AddUpcomingMeals;
+

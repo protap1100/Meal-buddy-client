@@ -17,6 +17,8 @@ import AllMeals from "../Pages/DashboardPages/AllMeals";
 import Review from "../Pages/DashboardPages/Review";
 import ServedMeals from "../Pages/DashboardPages/ServedMeals";
 import AddMeals from "../Pages/DashboardPages/AddMeals";
+import AddUpcomingMeals from "../Pages/DashboardPages/AddUpcomingMeals";
+import AdminUpcomingMeals from "../Pages/DashboardPages/AdminUpcomingMeals";
 
 export const router = createBrowserRouter([
   {
@@ -80,7 +82,7 @@ export const router = createBrowserRouter([
       },
       {
         path:'/dashboard/upcomingMeals',
-        element : <UpcomingMeals></UpcomingMeals>
+        element : <AdminUpcomingMeals></AdminUpcomingMeals>
       },
       {
         path:'/dashboard/reviews',
@@ -93,6 +95,10 @@ export const router = createBrowserRouter([
       {
         path:'/dashboard/addMeals',
         element:<AddMeals></AddMeals>
+      },
+      {
+        path: '/dashboard/addUpcomingMeals',
+        element : <AddUpcomingMeals></AddUpcomingMeals>
       }
     ],
   },

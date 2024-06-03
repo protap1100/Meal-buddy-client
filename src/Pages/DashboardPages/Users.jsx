@@ -1,9 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../Components/Shared/SectionTitle";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaUser } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Loading from "../../Others/Loading";
+import { RiAdminFill } from "react-icons/ri";
+import "react-tooltip/dist/react-tooltip.css";
+import { Tooltip } from "react-tooltip";
 
 const Users = () => {
   const axiosPublic = useAxiosPublic();
@@ -64,6 +67,31 @@ const Users = () => {
     });
   };
 
+  const handleAdmin = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You Want to Make Him Admin",
+      icon: "success",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Make Him",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosPublic.patch(`http://localhost:5000/users/admin/${id}`).then((res) => {
+          if (res.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Updated",
+              text: "User has been Updated successfully!",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
+
   if (isLoading) {
     return <Loading></Loading>;
   }
@@ -84,6 +112,7 @@ const Users = () => {
                 <th className="text-center">Name</th>
                 <th className="text-center">Email</th>
                 <th className="text-center">Badge</th>
+                <th className="text-center">Make Admin</th>
                 <th className="text-center">Action</th>
               </tr>
             </thead>
@@ -94,6 +123,31 @@ const Users = () => {
                   <td className="text-center">{user?.name}</td>
                   <td className="text-center">{user?.email}</td>
                   <td className="text-center">{user?.badge}</td>
+                  <td className="text-center">
+                    {user.role === "admin" ? (
+                      <div>
+                        <Tooltip id="my-tooltip" />
+                        <p
+                          data-tooltip-id="my-tooltip"
+                          data-tooltip-content="Admin"
+                          className="flex justify-center text-3xl text-green-600"
+                        >
+                          <RiAdminFill></RiAdminFill>
+                        </p>
+                      </div>
+                    ) : (
+                      <>
+                        <p
+                          onClick={() => {
+                            handleAdmin(user._id);
+                          }}
+                          className="p-2 bg-blue-600 rounded cursor-pointer w-1/2 mx-auto text-white hover:bg-blue-400 flex justify-center items-center gap-2"
+                        >
+                          <FaUser></FaUser> Make Admin
+                        </p>
+                      </>
+                    )}
+                  </td>
                   <th className="text-center">
                     <button
                       onClick={() => {

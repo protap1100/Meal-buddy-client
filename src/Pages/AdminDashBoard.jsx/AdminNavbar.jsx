@@ -78,6 +78,18 @@ const AdminNavbar = () => {
           Server Meals
         </NavLink>
         <NavLink
+          to="/dashboard/addUpcomingMeals"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "bg-orange-400 p-2 rounded-xl border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-300"
+              : "mt-3 transition-all duration-700 ease-in-out  bg-violet-200  p-2 rounded-xl hover:bg-violet-300 border-b-2 border-black"
+          }
+        >
+          Add Upcoming Meals
+        </NavLink>
+        <NavLink
           to="/dashboard/addMeals"
           className={({ isActive, isPending }) =>
             isPending

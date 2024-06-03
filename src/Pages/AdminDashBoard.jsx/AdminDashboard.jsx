@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import AdminNavbar from "./AdminNavbar";
 import AdminTopbar from "./AdminTopbar";
+import AdminFooter from "./AdminFooter";
 
 const AdminDashboard = () => {
   return (
@@ -15,6 +16,9 @@ const AdminDashboard = () => {
         <div className="w-5/6 bg-blue-50">
           <Outlet></Outlet>
         </div>
+      </div>
+      <div className="mt-5">
+      <AdminFooter></AdminFooter>
       </div>
     </>
   );

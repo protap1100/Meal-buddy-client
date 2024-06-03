@@ -14,7 +14,7 @@ const MealsCard = ({ item }) => {
       } p-4 rounded`}
     >
       <div className="relative">
-        <img className="w-full rounded" src={item.image} alt="" />
+        <img className="w-full h-80 rounded" src={item.image} alt="" />
         <h1 className="bg-black text-white p-2 rounded-xl absolute top-2 right-2">
           {item.price}
         </h1>
@@ -60,11 +60,14 @@ const MealsCard = ({ item }) => {
           }
           grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2  text-red-800`}
         >
-          {item.ingredients.map((ingredient, index) => (
-            <h1 key={index}>
-              {index + 1}. {ingredient}
-            </h1>
-          ))}
+         {
+            Array.isArray(item.ingredients) ? item.ingredients.map((ingredient, index) => (
+              <h1 key={index}>
+                {index + 1}. {ingredient}
+              </h1>
+            )) :  <>{item.ingredients}</>
+         }
+          
         </div>
       </div>
       <div className="flex gap-5 justify-center">
