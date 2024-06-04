@@ -2,7 +2,64 @@ import { Rating } from "@smastrom/react-rating";
 import { FaComment, FaThumbsUp } from "react-icons/fa";
 import "@smastrom/react-rating/style.css";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+import useAuth from "../../Hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../Others/Loading";
 const MealsCard = ({ item }) => {
+  const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
+
+  const handleRequestMeals = () => {
+    // console.log(id)
+    // console.log(item);
+    const servedMeals = {
+      title: item.title,
+      image: item.image,
+      category: item.category,
+      ingredients: item.ingredients,
+      description: item.description,
+      price: item.price,
+      rating: item.rating,
+      ServingStatus: "Pending",
+      name: user?.displayName,
+      email: user?.email,
+    };
+    axiosPublic.post("/servedMeals", servedMeals).then((res) => {
+      // console.log(id)
+      if (res.data.insertedId) {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Meals Request Successfully Sended",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
+
+  // getting reviews According meal id
+  const id = item._id;
+  // console.log(id)
+
+  const { data: reviewsData = [], isLoading: loading2 } = useQuery({
+    queryKey: ["reviews", id],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/reviews`, {
+        params: { mealId: id },
+      });
+      return res.data;
+    },
+  });
+
+  // console.log(reviewsData)
+
+  if (loading2) {
+    return <Loading></Loading>;
+  }
+
   return (
     <div
       className={`${
@@ -40,7 +97,7 @@ const MealsCard = ({ item }) => {
               <FaComment></FaComment>
             </h1>
             <h1>
-              {item.reviews} {item.reviews > 0 ? "Reviews" : "Review"}
+              {reviewsData.length} {item.reviews > 0 ? "Reviews" : "Review"}
             </h1>
           </div>
         </div>
@@ -60,18 +117,24 @@ const MealsCard = ({ item }) => {
           }
           grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2  text-red-800`}
         >
-         {
-            Array.isArray(item.ingredients) ? item.ingredients.map((ingredient, index) => (
+          {Array.isArray(item.ingredients) ? (
+            item.ingredients.map((ingredient, index) => (
               <h1 key={index}>
                 {index + 1}. {ingredient}
               </h1>
-            )) :  <>{item.ingredients}</>
-         }
-          
+            ))
+          ) : (
+            <>{item.ingredients}</>
+          )}
         </div>
       </div>
       <div className="flex gap-5 justify-center">
-        <button className="text-center mt-3 p-2 border-b-4 border-orange-200 hover:bg-orange-200 hover:text-white rounded-xl my-2 hover:border-orange-300 transition-all duration-700 ease-in-out">
+        <button
+          onClick={() => {
+            handleRequestMeals(item._id);
+          }}
+          className="text-center mt-3 p-2 border-b-4 border-orange-200 hover:bg-orange-200 hover:text-white rounded-xl my-2 hover:border-orange-300 transition-all duration-700 ease-in-out"
+        >
           Request Meal
         </button>
         <Link

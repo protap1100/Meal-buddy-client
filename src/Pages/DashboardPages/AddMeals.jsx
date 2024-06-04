@@ -47,7 +47,7 @@ const AddMeals = () => {
         description: data.description,
         rating: parseFloat(data.rating),
         image: res.data.data.display_url,
-        review: 0,
+        reviews: 0,
         likes: 0,
         ingredients: data.ingredients,
         name: user.displayName,
@@ -55,8 +55,8 @@ const AddMeals = () => {
         createdAt: createdAt,
       };
       const menuRes = await axiosPublic.post("/meals", mealsItem);
-      console.log(menuRes.data);
-      console.log("With Image Url", res.data);
+      // console.log(menuRes.data);
+      // console.log("With Image Url", res.data);
       if (menuRes.data.insertedId) {
         reset();
         Swal.fire({
@@ -148,6 +148,7 @@ const AddMeals = () => {
                 type="number"
                 className="mt-2 border border-[#1313181A] text-sm rounded-lg block w-full p-5"
                 placeholder="Enter the price"
+                step="0.1"
               />
               {errors.price && (
                 <p className="text-red-500">{errors.price.message}</p>
@@ -159,6 +160,8 @@ const AddMeals = () => {
                 {...register("rating", { required: "Rating is required" })}
                 type="number"
                 step="0.1"
+                min={0}
+                max={5}
                 className="mt-2 border border-[#1313181A] text-sm rounded-lg block w-full p-5"
                 placeholder="Enter the rating"
               />
