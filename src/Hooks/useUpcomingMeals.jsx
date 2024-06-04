@@ -5,7 +5,7 @@ import useAxiosPublic from "./useAxiosPublic";
 const useUpcomingMeals = () => {
   const axiosPublic = useAxiosPublic();
 
-  const {data: meal =[] ,isPending : loading, refetch} = useQuery({
+  const {data: upcomingMeal =[] ,isPending : loading, refetch} = useQuery({
     queryKey: ['upcomingMeals'],
     queryFn : async() =>{
       const res = await axiosPublic.get('/upcomingMeals');
@@ -14,7 +14,7 @@ const useUpcomingMeals = () => {
   })
 
 
-  return [meal,loading,refetch]
+  return [upcomingMeal,loading,refetch]
 
 
 };
