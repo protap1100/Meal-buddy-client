@@ -16,7 +16,7 @@ const UpcomingMealsCard = ({ item }) => {
       <div className="relative bg-white">
         <img className="w-full h-80 rounded" src={item.image} alt="" />
         <h1 className="bg-black text-white p-2 rounded-xl absolute top-2 right-2">
-          {item.price}
+          {item.price} $
         </h1>
         <div className="w-40 my-2 absolute bottom-0">
           {<Rating readOnly value={item.rating} key={item.rating} />}

@@ -158,6 +158,8 @@ const AddUpcomingMeals = () => {
                 {...register("rating", { required: "Rating is required" })}
                 type="number"
                 step="0.1"
+                min={0}
+                max={5}
                 className="mt-2 border border-[#1313181A] text-sm rounded-lg block w-full p-5"
                 placeholder="Enter the rating"
               />
