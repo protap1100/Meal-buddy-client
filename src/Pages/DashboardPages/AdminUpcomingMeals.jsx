@@ -89,29 +89,29 @@ const AdminUpcomingMeals = () => {
       </div>
       <div>
         <div className="overflow-x-auto">
-          <table className="table text-xl">
+          <table className="min-w-full bg-white border border-gray-200 text-lg">
             <thead>
               <tr className="text-lg">
-                <th className="text-center">#</th>
-                <th className="text-center">Name</th>
-                <th className="text-center">Image</th>
-                <th className="text-center">Category</th>
-                <th className="text-center">Description</th>
-                <th className="text-center">Rating</th>
-                <th className="text-center">Likes</th>
-                <th className="text-center">Price</th>
-                <th className="text-center">Email</th>
-                <th className="text-center">Created At</th>
-                <th className="text-center">Add To Meals</th>
-                <th className="text-center">Delete</th>
+                <th className="py-2 px-4 border text-center">#</th>
+                <th className="py-2 px-4 border text-center">Name</th>
+                <th className="py-2 px-4 border text-center">Image</th>
+                <th className="py-2 px-4 border text-center">Category</th>
+                <th className="py-2 px-4 border text-center">Description</th>
+                <th className="py-2 px-4 border text-center">Rating</th>
+                <th className="py-2 px-4 border text-center">Likes</th>
+                <th className="py-2 px-4 border text-center">Price</th>
+                <th className="py-2 px-4 border text-center">Email</th>
+                <th className="py-2 px-4 border text-center">Created At</th>
+                <th className="py-2 px-4 border text-center">Add To Meals</th>
+                <th className="py-2 px-4 border text-center">Delete</th>
               </tr>
             </thead>
             <tbody>
               {meal.map((m, index) => (
                 <tr key={m._id}>
-                  <td className="text-center">{index + 1}</td>
-                  <td className="text-center">{m.title}</td>
-                  <td className="flex justify-center">
+                  <td className="py-2 px-4 border text-center">{index + 1}</td>
+                  <td className="py-2 px-4 border text-center">{m.title}</td>
+                  <td className="py-2 px-4 border flex justify-center">
                     <div className="flex items-center gap-3">
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
@@ -123,19 +123,19 @@ const AdminUpcomingMeals = () => {
                       </div>
                     </div>
                   </td>
-                  <td className="text-center">{m.category}</td>
-                  <td className="text-center">{m.description}</td>
-                  <td className="text-center">{m.rating}</td>
-                  <td className="text-center">{m.likes}</td>
-                  <td className="text-center">{m.price}</td>
-                  <td className="text-center">{m.email}</td>
-                  <td className="text-center">{format(new Date(m.createdAt), 'PPpp')}</td>
-                  <td className="text-2xl flex items-center justify-center text-green-600 cursor-pointer">
+                  <td className="py-2 px-4 border text-center">{m.category}</td>
+                  <td className="py-2 px-4 border text-center">{m.description}</td>
+                  <td className="py-2 px-4 border text-center">{m.rating}</td>
+                  <td className="py-2 px-4 border text-center">{m.likes}</td>
+                  <td className="py-2 px-4 border text-center">{m.price}</td>
+                  <td className="py-2 px-4 border text-center">{m.email}</td>
+                  <td className="py-2 px-4 border text-center">{format(new Date(m.createdAt), 'PPpp')}</td>
+                  <td className="text-2xl py-2 px-4 border text-center flex items-center justify-center text-green-600 cursor-pointer">
                     <button onClick={() => handleTransferMeal(m)} className="btn">Add To Meals</button>
                   </td>
                   <td
                     onClick={() => handleDelete(m)}
-                    className="text-2xl text-red-600 cursor-pointer"
+                    className="text-2xl text-red-600 cursor-pointer py-2 px-4 border text-center"
                   >
                     <FaTrash />
                   </td>

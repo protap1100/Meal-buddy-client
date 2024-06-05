@@ -58,10 +58,11 @@ const MealsDetails = () => {
       Swal.fire({
         position: "top-center",
         icon: "success",
-        title: "Review Add Successfully",
+        title: "Review Added Successfully",
         showConfirmButton: false,
         timer: 1500,
       });
+      window.location.reload();
     }
   };
 
@@ -93,6 +94,15 @@ const MealsDetails = () => {
       }
     });
   };
+
+  // Handling Like 
+  const handleLike = (id) =>{
+      axiosPublic.patch(`/likes/${id}`).then(res=>{
+        console.log(res)
+      }).catch(error=>{
+        console.log(error)
+      })
+  }
 
   // getting reviews According meal id
   const { data: reviewsData = [], isLoading: loading2 } = useQuery({
@@ -135,8 +145,8 @@ const MealsDetails = () => {
             : "bg-red-100"
         } p-10 mt-5 rounded flex w-[900px] items-center mx-auto justify-center`}
       >
-        <div>
-          <div className="relative bg-white  rounded">
+        <div className="">
+          <div className="relative w-3/4 bg-white  rounded">
             <img className="w-full h-80 rounded" src={image} alt="" />
             <h1 className="bg-black text-white p-2 rounded-xl absolute top-2 right-2">
               {price}
@@ -148,14 +158,14 @@ const MealsDetails = () => {
               <h1 className="text-xl">{category}</h1>
             </div>
           </div>
-          <div className="text-left">
+          <div className="text-left w-4/5">
             <div className="mt-2 flex gap-20">
               <div className="flex items-center gap-2">
-                <h1 className="text-blue-500 cursor-pointer">
+                <button onClick={()=>{handleLike(_id)}} className="text-blue-500 cursor-pointer">
                   <FaThumbsUp></FaThumbsUp>
-                </h1>
+                </button>
                 <h1>
-                  {likes} {likes > 0 ? "Likes" : "Like"}{" "}
+                  {likes} {likes > 0 ? "Likes" : "Like"}
                 </h1>
               </div>
               <div className="flex items-center gap-3 ">
@@ -208,7 +218,7 @@ const MealsDetails = () => {
           </div>
         </div>
         <form
-          className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg"
+          className="max-w-md  w-2/3 mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="mb-4">
