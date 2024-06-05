@@ -100,10 +100,13 @@ const Navbar = () => {
                   </div>
                   <ul
                     tabIndex={0}
-                    className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32"
+                    className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40"
                   >
                     <li>
                       <Link to='/dashboard'>DashBoard</Link>
+                    </li>
+                    <li>
+                      <Link to='/userDashboard/userHome'>User Dashboard</Link>
                     </li>
                     <li>
                       <Link to='/myProfile'>About Me</Link>

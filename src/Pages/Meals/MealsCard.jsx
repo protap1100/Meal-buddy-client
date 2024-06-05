@@ -32,7 +32,7 @@ const MealsCard = ({ item }) => {
         Swal.fire({
           position: "top-center",
           icon: "success",
-          title: "Meals Request Successfully Sended",
+          title: "Meals Request Successfully Sended And Added To card also",
           showConfirmButton: false,
           timer: 1500,
         });

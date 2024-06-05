@@ -19,6 +19,13 @@ import ServedMeals from "../Pages/DashboardPages/ServedMeals";
 import AddMeals from "../Pages/DashboardPages/AddMeals";
 import AddUpcomingMeals from "../Pages/DashboardPages/AddUpcomingMeals";
 import AdminUpcomingMeals from "../Pages/DashboardPages/AdminUpcomingMeals";
+import Checkout from "../Pages/Checkout/Checkout";
+import UserLayout from "../Pages/UserDashBoard.jsx/UserLayOut.jsx/UserLayout";
+import UserHome from "../Pages/UserDashBoard.jsx/UserHome.jsx/UserHome";
+import UserCart from "../Pages/UserDashBoard.jsx/UserCart/UserCart";
+import UsersReview from "../Pages/UserDashBoard.jsx/UsersReview/UsersReview";
+import UserProfile from "../Pages/UserDashBoard.jsx/UserProfile/UserProfile";
+import UserPaymentHistory from "../Pages/UserDashBoard.jsx/UserPaymentHistory/UserPaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: "/mealDetails/:id",
         element: <MealsDetails></MealsDetails>,
+      },
+      {
+        path: "/checkout/:packageName",
+        element: <Checkout></Checkout>,
       },
     ],
   },
@@ -99,7 +110,33 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/addUpcomingMeals',
         element : <AddUpcomingMeals></AddUpcomingMeals>
-      }
+      },
     ],
   },
+  {
+    path:'/userDashboard',
+    element : <UserLayout></UserLayout>,
+    children : [
+      {
+        path : '/userDashboard/userHome',
+        element : <UserHome></UserHome>
+      },
+      {
+        path : '/userDashboard/cart',
+        element : <UserCart></UserCart>
+      },
+      {
+        path : '/userDashboard/review',
+        element : <UsersReview></UsersReview>
+      },
+      {
+        path:'/userDashboard/userProfile',
+        element : <UserProfile></UserProfile>
+      },
+      {
+        path:'/userDashboard/payment',
+        element : <UserPaymentHistory></UserPaymentHistory>
+      }
+    ]
+  }
 ]);

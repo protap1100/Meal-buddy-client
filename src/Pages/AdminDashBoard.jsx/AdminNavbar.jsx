@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const AdminNavbar = () => {
   return (
-    <nav className="bg-green-200 text-white py-4 px-6 h-full">
+    <nav className="bg-green-200 text-white py-4 pr-2 h-full">
       <div className="flex flex-col">
         <NavLink
           to="/dashboard/manageUsers"
@@ -10,8 +10,8 @@ const AdminNavbar = () => {
             isPending
               ? "pending"
               : isActive
-              ? "bg-orange-400 p-2 rounded-xl border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-300"
-              : "mt-3 transition-all duration-700 ease-in-out  bg-violet-200  p-2 rounded-xl hover:bg-violet-300 border-b-2 border-black"
+              ? "bg-orange-400 p-2  border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-100"
+              : "mt-3 transition-all duration-700 ease-in-out  bg-orange-600  p-2  hover:bg-violet-100 border-b-2 border-black"
           }
         >
           Manage Users
@@ -22,8 +22,8 @@ const AdminNavbar = () => {
             isPending
               ? "pending"
               : isActive
-              ? "bg-orange-400 p-2 rounded-xl border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-300"
-              : "mt-3 transition-all duration-700 ease-in-out  bg-violet-200  p-2 rounded-xl hover:bg-violet-300 border-b-2 border-black"
+              ? "bg-orange-400 p-2  border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-100"
+              : "mt-3 transition-all duration-700 ease-in-out  bg-orange-600  p-2  hover:bg-violet-100 border-b-2 border-black"
           }
         >
           Feedback
@@ -35,8 +35,8 @@ const AdminNavbar = () => {
             isPending
               ? "pending"
               : isActive
-              ? "bg-orange-400 p-2 rounded-xl border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-300"
-              : "mt-3 transition-all duration-700 ease-in-out  bg-violet-200  p-2 rounded-xl hover:bg-violet-300 border-b-2 border-black"
+              ? "bg-orange-400 p-2  border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-100"
+              : "mt-3 transition-all duration-700 ease-in-out  bg-orange-600  p-2  hover:bg-violet-100 border-b-2 border-black"
           }
         >
           Upcoming Meals
@@ -47,8 +47,8 @@ const AdminNavbar = () => {
             isPending
               ? "pending"
               : isActive
-              ? "bg-orange-400 p-2 rounded-xl border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-300"
-              : "mt-3 transition-all duration-700 ease-in-out  bg-violet-200  p-2 rounded-xl hover:bg-violet-300 border-b-2 border-black"
+              ? "bg-orange-400 p-2  border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-100"
+              : "mt-3 transition-all duration-700 ease-in-out  bg-orange-600  p-2  hover:bg-violet-100 border-b-2 border-black"
           }
         >
           All Meals
@@ -59,8 +59,8 @@ const AdminNavbar = () => {
             isPending
               ? "pending"
               : isActive
-              ? "bg-orange-400 p-2 rounded-xl border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-300"
-              : "mt-3 transition-all duration-700 ease-in-out  bg-violet-200  p-2 rounded-xl hover:bg-violet-300 border-b-2 border-black"
+              ? "bg-orange-400 p-2  border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-100"
+              : "mt-3 transition-all duration-700 ease-in-out  bg-orange-600  p-2  hover:bg-violet-100 border-b-2 border-black"
           }
         >
           Reviews
@@ -71,8 +71,8 @@ const AdminNavbar = () => {
             isPending
               ? "pending"
               : isActive
-              ? "bg-orange-400 p-2 rounded-xl border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-300"
-              : "mt-3 transition-all duration-700 ease-in-out  bg-violet-200  p-2 rounded-xl hover:bg-violet-300 border-b-2 border-black"
+              ? "bg-orange-400 p-2  border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-100"
+              : "mt-3 transition-all duration-700 ease-in-out  bg-orange-600  p-2  hover:bg-violet-100 border-b-2 border-black"
           }
         >
           Server Meals
@@ -83,8 +83,8 @@ const AdminNavbar = () => {
             isPending
               ? "pending"
               : isActive
-              ? "bg-orange-400 p-2 rounded-xl border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-300"
-              : "mt-3 transition-all duration-700 ease-in-out  bg-violet-200  p-2 rounded-xl hover:bg-violet-300 border-b-2 border-black"
+              ? "bg-orange-400 p-2  border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-100"
+              : "mt-3 transition-all duration-700 ease-in-out  bg-orange-600  p-2  hover:bg-violet-100 border-b-2 border-black"
           }
         >
           Add Upcoming Meals
@@ -95,8 +95,8 @@ const AdminNavbar = () => {
             isPending
               ? "pending"
               : isActive
-              ? "bg-orange-400 p-2 rounded-xl border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-300"
-              : "mt-3 transition-all duration-700 ease-in-out  bg-violet-200  p-2 rounded-xl hover:bg-violet-300 border-b-2 border-black"
+              ? "bg-orange-400 p-2  border-b-2 transition-all duration-700 ease-in-out border-black mt-2 hover:bg-orange-100"
+              : "mt-3 transition-all duration-700 ease-in-out  bg-orange-600  p-2  hover:bg-violet-100 border-b-2 border-black"
           }
         >
           Add Meals
