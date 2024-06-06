@@ -8,16 +8,18 @@ import Loading from "../../Others/Loading";
 import { Tooltip as Tooltip } from "react-tooltip";
 import Swal from "sweetalert2";
 import { FaUser } from "react-icons/fa";
+import useUser from "../../Hooks/useUser";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { user, loading, logOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
+  const [singleUser, loading3] = useUser();
+  console.log(singleUser);
   useEffect(() => {
     setOpen(false);
   }, [location]);
-
+  // console.log(user);
   const router = [
     { id: 1, path: "/", name: "Home" },
     { id: 2, path: "/meals", name: "Meals" },
@@ -38,7 +40,9 @@ const Navbar = () => {
       .then((error) => console.log(error));
   };
 
-  loading && <Loading />;
+  if (loading || loading3) {
+    <Loading></Loading>;
+  }
   // loading && <p>loading.....</p>
 
   return (
@@ -65,7 +69,7 @@ const Navbar = () => {
                 : "-translate-x-full md:translate-x-0"
             }`}
           >
-            {router.map((route,index) => (
+            {router.map((route, index) => (
               <li
                 key={index}
                 className={`md:border-none ${open ? "mt-4" : "mt-0"}`}
@@ -102,14 +106,17 @@ const Navbar = () => {
                     tabIndex={0}
                     className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40"
                   >
+                    {singleUser?.role === "admin" ? (
+                      <li>
+                        <Link to="/dashboard">DashBoard</Link>
+                      </li>
+                    ) : (
+                      <li>
+                        <Link to="/userDashboard/userHome">User Dashboard</Link>
+                      </li>
+                    )}
                     <li>
-                      <Link to='/dashboard'>DashBoard</Link>
-                    </li>
-                    <li>
-                      <Link to='/userDashboard/userHome'>User Dashboard</Link>
-                    </li>
-                    <li>
-                      <Link to='/myProfile'>About Me</Link>
+                      <Link to="/myProfile">About Me</Link>
                     </li>
                     <li>
                       <button onClick={handleLogout}>Logout</button>

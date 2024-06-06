@@ -7,37 +7,50 @@ import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Others/Loading";
+import useUser from "../../Hooks/useUser";
 const MealsCard = ({ item }) => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
+  const [singleUser, loading3] = useUser();
 
   const handleRequestMeals = () => {
     // console.log(id)
     // console.log(item);
-    const servedMeals = {
-      title: item.title,
-      image: item.image,
-      category: item.category,
-      ingredients: item.ingredients,
-      description: item.description,
-      price: item.price,
-      rating: item.rating,
-      ServingStatus: "Pending",
-      name: user?.displayName,
-      email: user?.email,
-    };
-    axiosPublic.post("/servedMeals", servedMeals).then((res) => {
-      // console.log(id)
-      if (res.data.insertedId) {
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: "Meals Request Successfully Sended And Added To card also",
-          showConfirmButton: false,
-          timer: 1500,
+
+    if (singleUser.badge === "") {
+      Swal.fire({
+        position: "top-center",
+        icon: "error",
+        title: "You Need Any MemberShip To Request For meal",
+      });
+    } else {
+      {
+        const servedMeals = {
+          title: item.title,
+          image: item.image,
+          category: item.category,
+          ingredients: item.ingredients,
+          description: item.description,
+          price: item.price,
+          rating: item.rating,
+          ServingStatus: "Pending",
+          name: user?.displayName,
+          email: user?.email,
+        };
+        axiosPublic.post("/servedMeals", servedMeals).then((res) => {
+          // console.log(id)
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: "Meals Request Successfully Sended And Added To card also",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
         });
       }
-    });
+    }
   };
 
   // getting reviews According meal id
@@ -56,7 +69,7 @@ const MealsCard = ({ item }) => {
 
   // console.log(reviewsData)
 
-  if (loading2) {
+  if (loading2 || loading3) {
     return <Loading></Loading>;
   }
 

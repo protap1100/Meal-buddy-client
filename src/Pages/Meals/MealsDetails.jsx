@@ -9,12 +9,16 @@ import { Controller, useForm } from "react-hook-form";
 import "@smastrom/react-rating/style.css";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useUser from "../../Hooks/useUser";
 // import EmojiPicker from "emoji-picker-react";
 
 const MealsDetails = () => {
   const axiosPublic = useAxiosPublic();
   const { id } = useParams();
   const { user } = useAuth();
+  const [singleUser, loading3] = useUser();
+
+  console.log("single user", singleUser);
 
   const { data: meal = {}, isLoading: loading } = useQuery({
     queryKey: ["meal", id],
@@ -69,40 +73,51 @@ const MealsDetails = () => {
   const handleRequestMeals = () => {
     // console.log(id)
     // console.log(item);
-    const servedMeals = {
-      title: title,
-      image: image,
-      category: category,
-      ingredients: ingredients,
-      description: description,
-      price: price,
-      rating: rating,
-      ServingStatus: "Pending",
-      name: user?.displayName,
-      email: user?.email,
-    };
-    axiosPublic.post("/servedMeals", servedMeals).then((res) => {
-      // console.log(id)
-      if (res.data.result.insertedId) {
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: "Meals Request Successfully Sended",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    });
+    if (singleUser.badge === "Bronze" || "") {
+      Swal.fire({
+        position: "top-center",
+        icon: "error",
+        title: "You Need Any MemberShip To Request For meal",
+      });
+    } else {
+      const servedMeals = {
+        title: title,
+        image: image,
+        category: category,
+        ingredients: ingredients,
+        description: description,
+        price: price,
+        rating: rating,
+        ServingStatus: "Pending",
+        name: user?.displayName,
+        email: user?.email,
+      };
+      axiosPublic.post("/servedMeals", servedMeals).then((res) => {
+        // console.log(id)
+        if (res.data.result.insertedId) {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Meals Request Successfully Sended",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+    }
   };
 
-  // Handling Like 
-  const handleLike = (id) =>{
-      axiosPublic.patch(`/likes/${id}`).then(res=>{
-        console.log(res)
-      }).catch(error=>{
-        console.log(error)
+  // Handling Like
+  const handleLike = (id) => {
+    axiosPublic
+      .patch(`/likes/${id}`)
+      .then((res) => {
+        console.log(res);
       })
-  }
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   // getting reviews According meal id
   const { data: reviewsData = [], isLoading: loading2 } = useQuery({
@@ -115,7 +130,9 @@ const MealsDetails = () => {
     },
   });
 
-  if (loading || loading2) return <Loading />;
+  if (loading || loading2 || loading3){
+    return <Loading />;
+  }
   const {
     _id,
     title,
@@ -161,7 +178,12 @@ const MealsDetails = () => {
           <div className="text-left w-4/5">
             <div className="mt-2 flex gap-20">
               <div className="flex items-center gap-2">
-                <button onClick={()=>{handleLike(_id)}} className="text-blue-500 cursor-pointer">
+                <button
+                  onClick={() => {
+                    handleLike(_id);
+                  }}
+                  className="text-blue-500 cursor-pointer"
+                >
                   <FaThumbsUp></FaThumbsUp>
                 </button>
                 <h1>
@@ -303,13 +325,24 @@ const MealsDetails = () => {
           User Reaction About This Food
           <p>Total Reviews:{reviewsData.length}</p>
         </h1>
-        <div className={`grid ${reviewsData.length > 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-2' } grid-cols-2 md:grid-cols-2  gap-5`}>
+        <div
+          className={`grid ${
+            reviewsData.length > 3 ? "lg:grid-cols-3" : "lg:grid-cols-2"
+          } grid-cols-2 md:grid-cols-2  gap-5`}
+        >
           {reviewsData.map((rev) => (
-            <div className="bg-blue-100 grid my-2 rounded justify-center items-center" key={rev._id}>
-              <h1 className="text-xl text-orange-500" >Name: {rev.reviewerName}</h1>
-              <h1 className="text-xl text-orange-500"  style={{ maxWidth: 140 }}>{<Rating readOnly value={rev.rating} key={rev.rating} />}</h1>
-              <h1 className="text-xl text-orange-500" >Message:{rev.message}</h1>
-              <h1 className="text-xl text-orange-500" >Time:{rev.time}</h1>
+            <div
+              className="bg-blue-100 grid my-2 rounded justify-center items-center"
+              key={rev._id}
+            >
+              <h1 className="text-xl text-orange-500">
+                Name: {rev.reviewerName}
+              </h1>
+              <h1 className="text-xl text-orange-500" style={{ maxWidth: 140 }}>
+                {<Rating readOnly value={rev.rating} key={rev.rating} />}
+              </h1>
+              <h1 className="text-xl text-orange-500">Message:{rev.message}</h1>
+              <h1 className="text-xl text-orange-500">Time:{rev.time}</h1>
             </div>
           ))}
         </div>

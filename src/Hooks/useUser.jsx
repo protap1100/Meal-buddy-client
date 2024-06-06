@@ -2,23 +2,23 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic";
 import useAuth from "./useAuth";
 
-const useCart = () => {
+const useUser = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
-
+// console.log(user)
   const {
-    data: meal = [],
-    isPending: loading,
+    data: singleUser,
+    isPending: loading3,
     refetch,
   } = useQuery({
-    queryKey: ["meal"],
+    queryKey: ["user"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`sServingMeals/${user?.email}`);
+      const res = await axiosPublic.get(`/users/${user?.email}`);
       return res.data;
     },
+    enabled : !!user,
   });
-
-  return [meal, loading, refetch];
+  return [singleUser, loading3, refetch];
 };
 
-export default useCart;
+export default useUser;
