@@ -15,7 +15,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [singleUser, loading3] = useUser();
-  console.log(singleUser);
+  // console.log(singleUser);
+  
   useEffect(() => {
     setOpen(false);
   }, [location]);

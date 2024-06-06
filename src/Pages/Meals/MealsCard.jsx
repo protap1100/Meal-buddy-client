@@ -12,7 +12,7 @@ const MealsCard = ({ item }) => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
   const [singleUser, loading3] = useUser();
-
+  // console.log(item)
   const handleRequestMeals = () => {
     // console.log(id)
     // console.log(item);
@@ -33,6 +33,7 @@ const MealsCard = ({ item }) => {
           description: item.description,
           price: item.price,
           rating: item.rating,
+          likes: item.likes,
           ServingStatus: "Pending",
           name: user?.displayName,
           email: user?.email,

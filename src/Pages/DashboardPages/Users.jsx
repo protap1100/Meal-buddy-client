@@ -7,10 +7,11 @@ import Loading from "../../Others/Loading";
 import { RiAdminFill } from "react-icons/ri";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Users = () => {
   const axiosPublic = useAxiosPublic();
-
+  const axiosSecure = useAxiosSecure()
   const {
     data: users = [],
     isLoading,
@@ -18,7 +19,7 @@ const Users = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/users");
+      const res = await axiosSecure.get("/users");
       return res.data;
     },
   });
@@ -78,16 +79,18 @@ const Users = () => {
       confirmButtonText: "Yes, Make Him",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic.patch(`http://localhost:5000/users/admin/${id}`).then((res) => {
-          if (res.data.modifiedCount > 0) {
-            refetch();
-            Swal.fire({
-              title: "Updated",
-              text: "User has been Updated successfully!",
-              icon: "success",
-            });
-          }
-        });
+        axiosPublic
+          .patch(`http://localhost:5000/users/admin/${id}`)
+          .then((res) => {
+            if (res.data.modifiedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: "Updated",
+                text: "User has been Updated successfully!",
+                icon: "success",
+              });
+            }
+          });
       }
     });
   };

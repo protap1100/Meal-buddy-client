@@ -88,6 +88,7 @@ const MealsDetails = () => {
         description: description,
         price: price,
         rating: rating,
+        likes: likes,
         ServingStatus: "Pending",
         name: user?.displayName,
         email: user?.email,
