@@ -1,22 +1,26 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query'
 // import { useEffect, useState } from "react";
-import useAxiosPublic from "./useAxiosPublic";
+import useAxiosSecure from './useAxiosSecure';
 
 const useUpcomingMeals = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
+  // const [isAdmin, isAdminLoading] = useAdmin()
 
-  const {data: upcomingMeal =[] ,isPending : loading, refetch} = useQuery({
+  const {
+    data: upcomingMeal = [],
+    isLoading: loading,
+    refetch,
+  } = useQuery({
     queryKey: ['upcomingMeals'],
-    queryFn : async() =>{
-      const res = await axiosPublic.get('/upcomingMeals');
-      return res.data;
-    }
+    // enabled: !isAdminLoading && !!isAdmin?.admin,
+    queryFn: async () => {
+        const res = await axiosSecure.get('/upcomingMeals')
+        console.log(res);
+        return res.data
+    },
   })
 
+  return [upcomingMeal, loading, refetch]
+}
 
-  return [upcomingMeal,loading,refetch]
-
-
-};
-
-export default useUpcomingMeals;
+export default useUpcomingMeals

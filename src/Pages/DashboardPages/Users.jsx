@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../Components/Shared/SectionTitle";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { FaTrash, FaUser } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Loading from "../../Others/Loading";
@@ -10,7 +9,6 @@ import { Tooltip } from "react-tooltip";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Users = () => {
-  const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure()
   const {
     data: users = [],
@@ -37,7 +35,7 @@ const Users = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic
+        axiosSecure
           .delete(`http://localhost:5000/users/${id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
@@ -79,7 +77,7 @@ const Users = () => {
       confirmButtonText: "Yes, Make Him",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic
+        axiosSecure
           .patch(`http://localhost:5000/users/admin/${id}`)
           .then((res) => {
             if (res.data.modifiedCount > 0) {

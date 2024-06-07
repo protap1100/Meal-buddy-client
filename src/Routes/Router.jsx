@@ -26,6 +26,8 @@ import UserCart from "../Pages/UserDashBoard.jsx/UserCart/UserCart";
 import UsersReview from "../Pages/UserDashBoard.jsx/UsersReview/UsersReview";
 import UserProfile from "../Pages/UserDashBoard.jsx/UserProfile/UserProfile";
 import UserPaymentHistory from "../Pages/UserDashBoard.jsx/UserPaymentHistory/UserPaymentHistory";
+import PrivateRouter from "./PrivateRouter";
+import AdminRouter from "./AdminRouter";
 
 export const router = createBrowserRouter([
   {
@@ -73,7 +75,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <AdminDashboard></AdminDashboard>,
+    element: <AdminRouter><AdminDashboard></AdminDashboard></AdminRouter> ,
     children: [
       {
         path : '/dashboard',
@@ -115,7 +117,7 @@ export const router = createBrowserRouter([
   },
   {
     path:'/userDashboard',
-    element : <UserLayout></UserLayout>,
+    element : <PrivateRouter><UserLayout></UserLayout></PrivateRouter> ,
     children : [
       {
         path : '/userDashboard/userHome',

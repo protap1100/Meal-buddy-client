@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../Components/Shared/SectionTitle";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Review = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const { data: reviews = [], refetch } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/allReviews");
+      const res = await axiosSecure.get("/allReviews");
       return res.data;
     },
   });
@@ -24,7 +24,7 @@ const Review = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic.delete(`/deleteReviews/${review._id}`).then((res) => {
+        axiosSecure.delete(`/deleteReviews/${review._id}`).then((res) => {
           if (res.data.deletedCount) {
             refetch();
             Swal.fire({

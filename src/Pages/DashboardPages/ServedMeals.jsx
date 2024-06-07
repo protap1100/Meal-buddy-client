@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../Components/Shared/SectionTitle";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import Loading from "../../Others/Loading";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const ServedMeals = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const { data: serving = [], isLoading } = useQuery({
     queryKey: ["serving"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/servingMeals");
+      const res = await axiosSecure.get("/servingMeals");
       return res.data;
     },
   });

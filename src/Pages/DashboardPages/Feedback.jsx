@@ -1,12 +1,12 @@
 import { FaTrash } from "react-icons/fa";
 import SectionTitle from "../../Components/Shared/SectionTitle";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import Loading from "../../Others/Loading";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Feedback = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const {
     data: feedback = [],
@@ -15,7 +15,7 @@ const Feedback = () => {
   } = useQuery({
     queryKey: ["feedback"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/contact");
+      const res = await axiosSecure.get("/contact");
       return res.data;
     },
   });
@@ -31,7 +31,7 @@ const Feedback = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic.delete(`/contact/${id}`).then((res) => {
+        axiosSecure.delete(`/contact/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             refetch();
             Swal.fire({
