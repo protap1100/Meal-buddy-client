@@ -9,6 +9,7 @@ import { Tooltip as Tooltip } from "react-tooltip";
 import Swal from "sweetalert2";
 import { FaUser } from "react-icons/fa";
 import useUser from "../../Hooks/useUser";
+import useAdmin from "../../Hooks/useAdmin";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { user, loading, logOut } = useAuth();
@@ -16,7 +17,8 @@ const Navbar = () => {
   const location = useLocation();
   const [singleUser, loading3] = useUser();
   // console.log(singleUser);
-  
+  const [isAdmin,adminLoading] = useAdmin();
+  console.log(isAdmin)
   useEffect(() => {
     setOpen(false);
   }, [location]);
@@ -41,7 +43,7 @@ const Navbar = () => {
       .then((error) => console.log(error));
   };
 
-  if (loading || loading3) {
+  if (loading || loading3 || adminLoading) {
     <Loading></Loading>;
   }
   // loading && <p>loading.....</p>

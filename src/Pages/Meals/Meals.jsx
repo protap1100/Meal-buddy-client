@@ -6,17 +6,17 @@ import SectionTitle from "../../Components/Shared/SectionTitle";
 import MealsCategory from "./MealsCategory";
 
 const Meals = ({ limit, children }) => {
-  const [meal, loading, refetch] = useMeals();
+  const [meal, loading] = useMeals();
   const Breakfast = meal.filter((item) => item.category === "Breakfast");
   const Lunch = meal.filter((item) => item.category === "Lunch");
   const dinner = meal.filter((item) => item.category === "Dinner");
 
   if (loading) {
-    return <Loading />;
+    return <Loading/>;
   }
 
   const displayedMeals = meal.slice(0, limit);
-  console.log(meal);
+  // console.log(meal);
 
   return (
     <div>

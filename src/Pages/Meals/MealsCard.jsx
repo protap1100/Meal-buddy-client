@@ -11,13 +11,13 @@ import useUser from "../../Hooks/useUser";
 const MealsCard = ({ item }) => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
-  const [singleUser, loading3] = useUser();
+  const [singleUser] = useUser();
   // console.log(item)
   const handleRequestMeals = () => {
     // console.log(id)
     // console.log(item);
 
-    if (singleUser.badge === "") {
+    if (singleUser?.badge === "") {
       Swal.fire({
         position: "top-center",
         icon: "error",
@@ -70,8 +70,8 @@ const MealsCard = ({ item }) => {
 
   // console.log(reviewsData)
 
-  if (loading2 || loading3) {
-    return <Loading></Loading>;
+  if (loading2) {
+    return <Loading type='bars' ></Loading>;
   }
 
   return (
