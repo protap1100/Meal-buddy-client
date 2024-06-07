@@ -56,7 +56,7 @@ const UserNavbar = () => {
           <span>Review</span>
         </NavLink>
         <NavLink
-          to="/userDashboard/payment"
+          to="/userDashboard/paymentHistory"
           className={({ isActive }) =>
             `${
               isActive ? "border border-black" : ""

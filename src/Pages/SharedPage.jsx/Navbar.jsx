@@ -18,7 +18,7 @@ const Navbar = () => {
   const [singleUser, loading3] = useUser();
   // console.log(singleUser);
   const [isAdmin,adminLoading] = useAdmin();
-  console.log(isAdmin)
+  // console.log(isAdmin)
   useEffect(() => {
     setOpen(false);
   }, [location]);

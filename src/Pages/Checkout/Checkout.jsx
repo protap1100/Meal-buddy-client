@@ -2,7 +2,15 @@ import { useParams } from "react-router-dom";
 import SectionTitle from "../../Components/Shared/SectionTitle";
 import useUser from "../../Hooks/useUser";
 import Loading from "../../Others/Loading";
-import Swal from "sweetalert2";
+import {loadStripe} from '@stripe/stripe-js';
+import { Elements } from "@stripe/react-stripe-js";
+// import Swal from "sweetalert2";
+import CheckoutForm from './CheckoutForm';
+
+
+
+const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_API);
+// console.log(import.meta.env.VITE_PAYMENT_API)
 
 const Checkout = () => {
   const { packageName } = useParams();
@@ -25,20 +33,6 @@ const Checkout = () => {
     PackageDetails = "Upgrade Your Membership To Platinum To Get Many Discount";
     validity = 4;
   }
-  // console.log(packageName)
-
-  const handleClick = () => {
-    if (singleUser?.badge === packageName) {
-      Swal.fire({
-        position: "top-center",
-        icon: "error",
-        title: "You Already Have That Badge",
-      });
-    }{
-      // Payment Method
-      console.log('pay now')
-    }
-  };
 
   if (loading3) {
     return <Loading></Loading>;
@@ -53,12 +47,19 @@ const Checkout = () => {
         <h1 className="text-2xl font-bold">{PackageDetails}</h1>
         <h1 className="text-xl">Expiration : {validity} Weeks</h1>
         <h1 className="text-xl">Price {price}$</h1>
-        <button
-          onClick={handleClick}
-          className="p-2 rounded-xl border border-b-green-500 border-b-4 hover:text-white  text-black font-bold hover:bg-green-600 transition-all duration-700 ease-in-out"
-        >
-          Pay Now
-        </button>
+        {singleUser?.badge === packageName ? (
+          <>
+            <h1>You Already Have That Badge</h1>
+          </>
+        ) : (
+          <>
+           <div className='w-1/2'>
+              <Elements  stripe={stripePromise}>
+                  <CheckoutForm price={price} packageName={packageName}></CheckoutForm>
+              </Elements>
+           </div>
+          </>
+        )}
       </div>
     </div>
   );
