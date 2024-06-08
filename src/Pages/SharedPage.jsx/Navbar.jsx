@@ -7,9 +7,10 @@ import useAuth from "../../Hooks/useAuth";
 import Loading from "../../Others/Loading";
 import { Tooltip as Tooltip } from "react-tooltip";
 import Swal from "sweetalert2";
-import { FaUser } from "react-icons/fa";
+import { FaShoppingBag, FaUser } from "react-icons/fa";
 import useUser from "../../Hooks/useUser";
 import useAdmin from "../../Hooks/useAdmin";
+import useCart from "../../Hooks/useCart";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { user, loading, logOut } = useAuth();
@@ -17,8 +18,10 @@ const Navbar = () => {
   const location = useLocation();
   const [singleUser, loading3] = useUser();
   // console.log(singleUser);
-  const [isAdmin,adminLoading] = useAdmin();
+  const [isAdmin, adminLoading] = useAdmin();
   // console.log(isAdmin)
+  const [meal] = useCart();
+
   useEffect(() => {
     setOpen(false);
   }, [location]);
@@ -101,6 +104,14 @@ const Navbar = () => {
           <div className="flex items-center justify-center">
             {user ? (
               <>
+                <div className="text-3xl mr-4 flex items-center justify-center relative">
+                  <Link to="/userDashboard/cart" className="relative">
+                    <span className="absolute -top-2 -right-3 bg-red-500 text-white rounded-full text-xs w-6 h-6 flex items-center justify-center">
+                      {meal.length}
+                    </span>
+                    <FaShoppingBag />
+                  </Link>
+                </div>
                 <div className="dropdown dropdown-bottom dropdown-end">
                   <div tabIndex={0} role="button" className="text-2xl">
                     <GiHamburgerMenu></GiHamburgerMenu>
@@ -115,7 +126,9 @@ const Navbar = () => {
                       </li>
                     ) : (
                       <li>
-                        <Link to="/userDashboard/userProfile">User Dashboard</Link>
+                        <Link to="/userDashboard/userProfile">
+                          User Dashboard
+                        </Link>
                       </li>
                     )}
                     <li>
