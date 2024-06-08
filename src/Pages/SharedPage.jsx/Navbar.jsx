@@ -115,7 +115,7 @@ const Navbar = () => {
                       </li>
                     ) : (
                       <li>
-                        <Link to="/userDashboard/userHome">User Dashboard</Link>
+                        <Link to="/userDashboard/userProfile">User Dashboard</Link>
                       </li>
                     )}
                     <li>

@@ -18,7 +18,7 @@ const MealsDetails = () => {
   const [likeLoading, setLikeLoading] = useState(false);
   const { id } = useParams();
   const { user } = useAuth();
-  const [singleUser, loading3] = useUser();
+  const [singleUser] = useUser();
 
   console.log("single user", singleUser);
 
@@ -114,23 +114,35 @@ const MealsDetails = () => {
 
   // Handling Like
   const handleLike = (id) => {
-    setLikeLoading(true)
+    console.log(_id)
+    setLikeLoading(true);
+    const userId = _id; 
     axiosPublic
-      .patch(`/likes/${id}`)
+      .patch(`/likes/${id}`, { userId })
       .then((res) => {
-        //  console.log(res)
         if (res.data.modifiedCount > 0) {
           Swal.fire({
             icon: "success",
             text: "Like Added",
           });
+        } else {
+          Swal.fire({
+            icon: "info",
+            text: "You have already liked this meal",
+          });
         }
         setLikeLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data.message);
+        Swal.fire({
+          icon: "error",
+          text: error.response.data.message || "Something went wrong. Please try again later.",
+        });
+        setLikeLoading(false);
       });
   };
+  
 
   // getting reviews According meal id
   const { data: reviewsData = [], isLoading: loading2 } = useQuery({
@@ -143,7 +155,7 @@ const MealsDetails = () => {
     },
   });
 
-  if (loading || loading2 || loading3 || likeLoading) {
+  if (loading || loading2  || likeLoading) {
     return <Loading />;
   }
   const {

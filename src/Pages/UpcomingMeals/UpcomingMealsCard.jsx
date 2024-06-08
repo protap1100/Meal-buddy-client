@@ -1,8 +1,59 @@
 import { Rating } from "@smastrom/react-rating";
 import { FaComment, FaThumbsUp } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useUser from "../../Hooks/useUser";
+import Loading from "../../Others/Loading";
+import Swal from "sweetalert2";
+import { useState } from "react";
 
 const UpcomingMealsCard = ({ item }) => {
+  const [likeLoading, setLikeLoading] = useState(false);
+  const axiosPublic = useAxiosPublic();
+  const [singleUser] = useUser();
+  // Handling Like
+
+  const handleLike = (item) => {
+    if (singleUser?.badge === "Bronze") {
+      Swal.fire({
+        icon: "error",
+        text: "Buy Membership To Give Likes",
+      });
+    } else {
+      setLikeLoading(true);
+      const userId = singleUser?._id;
+      axiosPublic
+        .patch(`/upcomingLikes/${item._id}`, { userId })
+        .then((res) => {
+          if (res.data.modifiedCount > 0) {
+            Swal.fire({
+              icon: "success",
+              text: "Like Added",
+            });
+          } else {
+            Swal.fire({
+              icon: "info",
+              text: "You have already liked this meal",
+            });
+          }
+          setLikeLoading(false);
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+          Swal.fire({
+            icon: "error",
+            text:
+              error.response.data.message ||
+              "Something went wrong. Please try again later.",
+          });
+          setLikeLoading(false);
+        });
+    }
+  };
+
+  if (likeLoading) {
+    return <Loading></Loading>;
+  }
+
   return (
     <div
       className={`${
@@ -29,7 +80,13 @@ const UpcomingMealsCard = ({ item }) => {
         <div className="mt-2 flex gap-20">
           <div className="flex items-center gap-2">
             <h1 className="text-blue-500 cursor-pointer">
-              <FaThumbsUp></FaThumbsUp>
+              <button
+                onClick={() => {
+                  handleLike(item);
+                }}
+              >
+                <FaThumbsUp></FaThumbsUp>
+              </button>
             </h1>
             <h1>
               {item.likes} {item.likes > 0 ? "Likes" : "Like"}{" "}
@@ -70,14 +127,6 @@ const UpcomingMealsCard = ({ item }) => {
             <>{item.ingredients}</>
           )}
         </div>
-      </div>
-      <div className="flex gap-5 justify-center">
-        <Link
-          to={`/mealDetails/${item._id}`}
-          className="text-center mt-3 p-2 border-b-4 border-blue-200 hover:bg-blue-200 hover:text-white rounded-xl my-2 hover:border-blue-300 transition-all duration-700 ease-in-out"
-        >
-          See Details
-        </Link>
       </div>
     </div>
   );

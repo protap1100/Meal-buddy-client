@@ -21,7 +21,6 @@ import AddUpcomingMeals from "../Pages/DashboardPages/AddUpcomingMeals";
 import AdminUpcomingMeals from "../Pages/DashboardPages/AdminUpcomingMeals";
 import Checkout from "../Pages/Checkout/Checkout";
 import UserLayout from "../Pages/UserDashBoard.jsx/UserLayOut.jsx/UserLayout";
-import UserHome from "../Pages/UserDashBoard.jsx/UserHome.jsx/UserHome";
 import UserCart from "../Pages/UserDashBoard.jsx/UserCart/UserCart";
 import UsersReview from "../Pages/UserDashBoard.jsx/UsersReview/UsersReview";
 import UserProfile from "../Pages/UserDashBoard.jsx/UserProfile/UserProfile";
@@ -121,10 +120,6 @@ export const router = createBrowserRouter([
     path:'/userDashboard',
     element : <PrivateRouter><UserLayout></UserLayout></PrivateRouter> ,
     children : [
-      {
-        path : '/userDashboard/userHome',
-        element : <UserHome></UserHome>
-      },
       {
         path : '/userDashboard/cart',
         element : <UserCart></UserCart>

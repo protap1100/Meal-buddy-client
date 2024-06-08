@@ -12,17 +12,6 @@ const UserNavbar = () => {
     <div className="bg-gray-800 p-4 shadow-lg">
       <nav className="flex flex-wrap justify-around items-center text-white">
         <NavLink
-          to="/userDashboard/userHome"
-          className={({ isActive }) =>
-            `${
-              isActive ? "border border-black" : ""
-            } flex border-b-4 rounded border-white flex-col justify-center items-center hover:text-yellow-400 p-2 m-2`
-          }
-        >
-          <FaHome className="h-6 w-6" />
-          <span>Home</span>
-        </NavLink>
-        <NavLink
           to="/userDashboard/userProfile"
           className={({ isActive }) =>
             `${

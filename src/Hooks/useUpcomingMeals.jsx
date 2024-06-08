@@ -15,7 +15,7 @@ const useUpcomingMeals = () => {
     // enabled: !isAdminLoading && !!isAdmin?.admin,
     queryFn: async () => {
         const res = await axiosPublic.get('/upcomingMeals')
-        console.log(res);
+        // console.log(res);
         return res.data
     },
   })
