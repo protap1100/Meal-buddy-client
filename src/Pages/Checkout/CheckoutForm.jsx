@@ -71,17 +71,14 @@ const CheckoutForm = ({ price,packageName }) => {
                 text: 'Payment Successful',
                 icon: 'success'
             })
-
             // Saving Payment in Data Base
             const payment = {
                 email : user?.email,
-                name : user?.displayName,
-                price : price,
                 badge: packageName,
-                date : new Date(),
             }
-           const res = axiosSecure.post('/payments',payment);
+           const res = axiosSecure.patch('/payments',payment);
            console.log(res);
+           window.location.reload();
         }
     }
 

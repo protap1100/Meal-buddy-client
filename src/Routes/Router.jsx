@@ -29,6 +29,7 @@ import UserPaymentHistory from "../Pages/UserDashBoard.jsx/UserPaymentHistory/Us
 import PrivateRouter from "./PrivateRouter";
 import AdminRouter from "./AdminRouter";
 import Payment from "../Pages/Payment/Payment";
+import CartPayment from "../Pages/UserDashBoard.jsx/Payment/CartPayment";
 
 export const router = createBrowserRouter([
   {
@@ -143,6 +144,10 @@ export const router = createBrowserRouter([
       {
         path : '/userDashboard/payment',
         element : <Payment></Payment>
+      },
+      {
+        path : '/userDashboard/cartPayment',
+        element : <CartPayment></CartPayment>
       }
     ]
   }

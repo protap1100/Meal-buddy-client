@@ -10,16 +10,16 @@ import { NavLink } from "react-router-dom";
 const UserNavbar = () => {
   return (
     <div className="bg-gray-800 p-4 shadow-lg">
-      <nav className="flex justify-around items-center text-white">
+      <nav className="flex flex-wrap justify-around items-center text-white">
         <NavLink
           to="/userDashboard/userHome"
           className={({ isActive }) =>
             `${
               isActive ? "border border-black" : ""
-            }  flex border-b-4 rounded border-white flex-col justify-center items-center hover:text-yellow-400`
+            } flex border-b-4 rounded border-white flex-col justify-center items-center hover:text-yellow-400 p-2 m-2`
           }
         >
-          <FaHome className="h-6 flex w-6" />
+          <FaHome className="h-6 w-6" />
           <span>Home</span>
         </NavLink>
         <NavLink
@@ -27,7 +27,7 @@ const UserNavbar = () => {
           className={({ isActive }) =>
             `${
               isActive ? "border border-black" : ""
-            }  flex border-b-4 rounded border-white flex-col justify-center items-center hover:text-yellow-400`
+            } flex border-b-4 rounded border-white flex-col justify-center items-center hover:text-yellow-400 p-2 m-2`
           }
         >
           <FaUser className="h-6 w-6" />
@@ -38,7 +38,7 @@ const UserNavbar = () => {
           className={({ isActive }) =>
             `${
               isActive ? "border border-black" : ""
-            }  flex border-b-4 rounded border-white flex-col justify-center items-center hover:text-yellow-400`
+            } flex border-b-4 rounded border-white flex-col justify-center items-center hover:text-yellow-400 p-2 m-2`
           }
         >
           <FaShoppingBag className="h-6 w-6" />
@@ -49,7 +49,7 @@ const UserNavbar = () => {
           className={({ isActive }) =>
             `${
               isActive ? "border border-black" : ""
-            }  flex border-b-4 rounded border-white flex-col justify-center items-center hover:text-yellow-400`
+            } flex border-b-4 rounded border-white flex-col justify-center items-center hover:text-yellow-400 p-2 m-2`
           }
         >
           <FaBook className="h-6 w-6" />
@@ -60,7 +60,7 @@ const UserNavbar = () => {
           className={({ isActive }) =>
             `${
               isActive ? "border border-black" : ""
-            }  flex border-b-4 rounded border-white flex-col justify-center items-center hover:text-yellow-400`
+            } flex border-b-4 rounded border-white flex-col justify-center items-center hover:text-yellow-400 p-2 m-2`
           }
         >
           <FaHistory className="h-6 w-6" />
@@ -71,7 +71,7 @@ const UserNavbar = () => {
           className={({ isActive }) =>
             `${
               isActive ? "border border-black" : ""
-            }  flex border-b-4 rounded border-white flex-col justify-center items-center hover:text-yellow-400`
+            } flex border-b-4 rounded border-white flex-col justify-center items-center hover:text-yellow-400 p-2 m-2`
           }
         >
           <FaHome className="h-6 w-6" />

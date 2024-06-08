@@ -10,10 +10,12 @@ import "@smastrom/react-rating/style.css";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import useUser from "../../Hooks/useUser";
+import { useState } from "react";
 // import EmojiPicker from "emoji-picker-react";
 
 const MealsDetails = () => {
   const axiosPublic = useAxiosPublic();
+  const [likeLoading, setLikeLoading] = useState(false);
   const { id } = useParams();
   const { user } = useAuth();
   const [singleUser, loading3] = useUser();
@@ -81,6 +83,7 @@ const MealsDetails = () => {
       });
     } else {
       const servedMeals = {
+        id : singleUser._id,
         title: title,
         image: image,
         category: category,
@@ -94,8 +97,8 @@ const MealsDetails = () => {
         email: user?.email,
       };
       axiosPublic.post("/servedMeals", servedMeals).then((res) => {
-        // console.log(id)
-        if (res.data.result.insertedId) {
+        console.log(res)
+        if (res.data.insertedId) {
           Swal.fire({
             position: "top-center",
             icon: "success",
@@ -110,10 +113,18 @@ const MealsDetails = () => {
 
   // Handling Like
   const handleLike = (id) => {
+    setLikeLoading(true)
     axiosPublic
       .patch(`/likes/${id}`)
       .then((res) => {
-        console.log(res);
+        //  console.log(res)
+        if (res.data.modifiedCount > 0) {
+          Swal.fire({
+            icon: "success",
+            text: "Like Added",
+          });
+        }
+        setLikeLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -131,7 +142,7 @@ const MealsDetails = () => {
     },
   });
 
-  if (loading || loading2 || loading3){
+  if (loading || loading2 || loading3 || likeLoading) {
     return <Loading />;
   }
   const {

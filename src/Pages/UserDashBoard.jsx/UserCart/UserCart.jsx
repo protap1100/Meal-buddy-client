@@ -2,9 +2,13 @@ import { FaTrash } from "react-icons/fa";
 import SectionTitle from "../../../Components/Shared/SectionTitle";
 import useCart from "../../../Hooks/useCart";
 import Loading from "../../../Others/Loading";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { Link } from "react-router-dom";
 
 const UserCart = () => {
-  const [meal, loading, ,] = useCart();
+  const [meal, loading, refetch] = useCart();
+  const axiosPublic = useAxiosPublic();
 
   // Function to calculate total price
   const calculateTotal = () => {
@@ -13,6 +17,32 @@ const UserCart = () => {
       total += item.price;
     });
     return total;
+  };
+
+  const handleDelete = (m) => {
+    Swal.fire({
+      title: `Delete ${m.title}?`,
+      text: "Do you want to delete this item?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosPublic.delete(`/userCart/${m._id}`).then((res) => {
+          console.log(res);
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: `${m.title} has been deleted successfully`,
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
   };
 
   if (loading) {
@@ -38,6 +68,7 @@ const UserCart = () => {
               <th className="py-2 px-4 border text-center">Likes</th>
               <th className="py-2 px-4 border text-center">Price</th>
               <th className="py-2 px-4 border text-center">Email</th>
+              <th className="py-2 px-4 border text-center">Status</th>
               <th className="py-2 px-4 border text-center">Delete</th>
             </tr>
           </thead>
@@ -63,8 +94,15 @@ const UserCart = () => {
                 <td className="py-2 px-4 border text-center">{m.likes}</td>
                 <td className="py-2 px-4 border text-center">{m.price}</td>
                 <td className="py-2 px-4 border text-center">{m.email}</td>
+                <td className="py-2 px-4 border text-center">{m.ServingStatus}</td>
                 <td className="py-2 px-4 border flex justify-center items-center">
-                  <FaTrash />
+                  <button
+                    onClick={() => {
+                      handleDelete(m);
+                    }}
+                  >
+                    <FaTrash />
+                  </button>
                 </td>
               </tr>
             ))}
@@ -75,9 +113,11 @@ const UserCart = () => {
                 {calculateTotal()}
               </td>
               <td className="py-2 px-4 border text-center ">
-                <button className="p-2 rounded-xl border-b-4 border-green-300 hover:bg-green-300 hover:text-white">
-                  Pay Now
-                </button>
+               {
+                calculateTotal() > 0 ?  <button className="p-2 rounded-xl border-b-4 border-green-300 hover:bg-green-300 hover:text-white">
+                <Link to='/userDashboard/cartPayment'> Pay Now</Link>
+               </button> : <p>Add Something to Buy</p>
+               }
               </td>
               <td colSpan="2" className="border"></td>
             </tr>

@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 // import { useEffect, useState } from "react";
-import useAxiosSecure from './useAxiosSecure';
+import useAxiosPublic from './useAxiosPublic';
 
 const useUpcomingMeals = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   // const [isAdmin, isAdminLoading] = useAdmin()
 
   const {
@@ -14,7 +14,7 @@ const useUpcomingMeals = () => {
     queryKey: ['upcomingMeals'],
     // enabled: !isAdminLoading && !!isAdmin?.admin,
     queryFn: async () => {
-        const res = await axiosSecure.get('/upcomingMeals')
+        const res = await axiosPublic.get('/upcomingMeals')
         console.log(res);
         return res.data
     },

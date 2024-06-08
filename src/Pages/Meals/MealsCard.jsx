@@ -26,6 +26,7 @@ const MealsCard = ({ item }) => {
     } else {
       {
         const servedMeals = {
+          id : singleUser._id,
           title: item.title,
           image: item.image,
           category: item.category,
