@@ -56,6 +56,7 @@ const MealsDetails = () => {
       title: title,
       image: image,
       category: category,
+      price:price,
     };
     const review = await axiosPublic.post("/review", reviewData);
     console.log(review);
