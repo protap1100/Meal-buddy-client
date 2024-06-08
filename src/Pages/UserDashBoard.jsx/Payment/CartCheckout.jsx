@@ -77,15 +77,15 @@ const CheckoutForm = () => {
         console.log("transaction id", paymentIntent.id);
         setTransactionId(paymentIntent.id);
 
-        // now save the payment in the database
         const payment = {
           email: user.email,
           price: totalPrice,
           transactionId: paymentIntent.id,
-          date: new Date(), // utc date convert. use moment js to
+          date: new Date(), 
           cartIds: cart.map((item) => item._id),
-          menuItemIds: cart.map((item) => item.menuId),
+          menuItemIds: cart.map((item) => item.id),
           status: "paid",
+          pack : 'Meal'
         };
 
         const res = await axiosSecure.post("/payments", payment);
@@ -95,11 +95,11 @@ const CheckoutForm = () => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Thank you for the taka paisa",
+            title: "Payment Successful for your meal",
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate("/dashboard/paymentHistory");
+          navigate("/userDashboard/paymentHistory");
         }
       }
     }

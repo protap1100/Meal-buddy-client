@@ -94,7 +94,7 @@ const UserCart = () => {
                 <td className="py-2 px-4 border text-center">{m.likes}</td>
                 <td className="py-2 px-4 border text-center">{m.price}</td>
                 <td className="py-2 px-4 border text-center">{m.email}</td>
-                <td className="py-2 px-4 border text-center">{m.ServingStatus}</td>
+                <td className={`py-2 px-4 border text-center ${m.ServingStatus === 'paid'? 'text-red-600' : 'text-green-600'} `}>{m.ServingStatus}</td>
                 <td className="py-2 px-4 border flex justify-center items-center">
                   <button
                     onClick={() => {

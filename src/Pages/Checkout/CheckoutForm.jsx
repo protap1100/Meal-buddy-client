@@ -75,6 +75,11 @@ const CheckoutForm = ({ price,packageName }) => {
             const payment = {
                 email : user?.email,
                 badge: packageName,
+                pack : 'Membership',
+                price: price,
+                status: 'paid',
+                transactionId: paymentIntent.id,
+                date: new Date(), 
             }
            const res = axiosSecure.patch('/payments',payment);
            console.log(res);
