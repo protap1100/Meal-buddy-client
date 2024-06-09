@@ -9,6 +9,19 @@ const AdminNavbar = () => {
   return (
     <nav className="bg-green-200 text-white py-4 pr-2 h-full">
       <div className="flex flex-col">
+      <NavLink
+          to="/dashboard/adminHome"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "bg-orange-400 p-2  border-b-2 transition-all duration-700 ease-in-out flex items-center gap-2 border-black mt-2 hover:bg-orange-100"
+              : "mt-3 transition-all duration-700 ease-in-out  bg-orange-600 flex items-center gap-2 p-2  hover:bg-violet-100 border-b-2 border-black"
+          }
+        >
+          Home
+          <FaUser></FaUser>
+        </NavLink>
         <NavLink
           to="/dashboard/manageUsers"
           className={({ isActive, isPending }) =>

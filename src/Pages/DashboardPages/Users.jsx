@@ -9,7 +9,7 @@ import { Tooltip } from "react-tooltip";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Users = () => {
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
   const {
     data: users = [],
     isLoading,
@@ -36,7 +36,7 @@ const Users = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure
-          .delete(`http://localhost:5000/users/${id}`)
+          .delete(`users/${id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // Assuming refetch is a function to refresh the data
@@ -77,18 +77,16 @@ const Users = () => {
       confirmButtonText: "Yes, Make Him",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure
-          .patch(`http://localhost:5000/users/admin/${id}`)
-          .then((res) => {
-            if (res.data.modifiedCount > 0) {
-              refetch();
-              Swal.fire({
-                title: "Updated",
-                text: "User has been Updated successfully!",
-                icon: "success",
-              });
-            }
-          });
+        axiosSecure.patch(`users/admin/${id}`).then((res) => {
+          if (res.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Updated",
+              text: "User has been Updated successfully!",
+              icon: "success",
+            });
+          }
+        });
       }
     });
   };

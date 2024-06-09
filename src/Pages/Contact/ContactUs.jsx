@@ -9,35 +9,30 @@ import { useEffect } from "react";
 import Swal from "sweetalert2";
 import SectionTitle from "../../Components/Shared/SectionTitle";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const ContactUs = () => {
   const { user } = useAuth();
   const { register, handleSubmit } = useForm();
+  const axiosPublic = useAxiosPublic();
   const onSubmit = (data) => {
     const customData = {
       ...data,
       userEmail: user?.email,
       userPhoto: user?.photoURL,
       userName: user?.displayName,
-      date: new Date()
+      date: new Date(),
     };
-    fetch("http://localhost:5000/contact", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(customData),
-    })
-      .then((res) => res.json())
+    axiosPublic
+      .post("contact", customData)
       .then((data) => {
         console.log(data);
-        if (data.insertedId) {
+        if (data.data.insertedId) {
           Swal.fire({
             title: "Good job!",
             text: "Thank You For Contacting Us",
             icon: "success",
           });
-          // <Navigate state={location.pathname} to="/allRoom"></Navigate>;
         }
       });
   };
