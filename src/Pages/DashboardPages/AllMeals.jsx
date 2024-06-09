@@ -97,13 +97,12 @@ const AllMeals = () => {
                 <td className="py-2 px-4 border text-center">{m.email}</td>
                 <td className="py-2 px-4 border text-center">{m.createdAt}</td>
                 <td className="py-2 px-4 border text-center">
-                  <FaEdit className="text-green-600 text-2xl cursor-pointer" />
+                  <button> <Link to={`/dashboard/updateMeals/${m._id}`}><FaEdit className="text-green-600 text-2xl cursor-pointer" /></Link> </button>
                 </td>
                 <td
-                  onClick={() => handleDelete(m)}
                   className="py-2 px-4 border text-center cursor-pointer"
                 >
-                  <FaTrash className="text-red-600 text-2xl" />
+                  <button onClick={() => handleDelete(m)}><FaTrash className="text-red-600 text-2xl" /></button>
                 </td>
               </tr>
             ))}

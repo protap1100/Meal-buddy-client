@@ -8,10 +8,13 @@ import useAuth from "../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Others/Loading";
 import useUser from "../../Hooks/useUser";
+import { useState } from "react";
 const MealsCard = ({ item }) => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
   const [singleUser] = useUser();
+  const [likeLoading, setLikeLoading] = useState(false);
+  console.log('hi')
   // console.log(item)
   const handleRequestMeals = () => {
     // console.log(id)
@@ -26,7 +29,7 @@ const MealsCard = ({ item }) => {
     } else {
       {
         const servedMeals = {
-          id : singleUser._id,
+          id: singleUser._id,
           title: item.title,
           image: item.image,
           category: item.category,
@@ -57,7 +60,7 @@ const MealsCard = ({ item }) => {
 
   // getting reviews According meal id
   const id = item._id;
-  // console.log(id)
+  // console.log(item)
 
   const { data: reviewsData = [], isLoading: loading2 } = useQuery({
     queryKey: ["reviews", id],
@@ -69,10 +72,43 @@ const MealsCard = ({ item }) => {
     },
   });
 
+  // Handling Like
+  const handleLike = (id) => {
+    console.log(singleUser?._id);
+    setLikeLoading(true);
+    const userId = singleUser?._id;
+    axiosPublic
+      .patch(`/likes/${id}`, { userId })
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          Swal.fire({
+            icon: "success",
+            text: "Like Added",
+          });
+        } else {
+          Swal.fire({
+            icon: "info",
+            text: "You have already liked this meal",
+          });
+        }
+        setLikeLoading(false);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+        Swal.fire({
+          icon: "error",
+          text:
+            error.response.data.message ||
+            "Something went wrong. Please try again later.",
+        });
+        setLikeLoading(false);
+      });
+  };
+
   // console.log(reviewsData)
 
-  if (loading2) {
-    return <Loading type='bars' ></Loading>;
+  if (loading2 || likeLoading) {
+    return <Loading type="bars"></Loading>;
   }
 
   return (
@@ -88,7 +124,7 @@ const MealsCard = ({ item }) => {
       <div className="relative">
         <img className="w-full h-80 rounded" src={item.image} alt="" />
         <h1 className="bg-black text-white p-2 rounded-xl absolute top-2 right-2">
-          {item.price}
+          {item.price} $
         </h1>
         <div className="w-40 my-2 absolute bottom-0">
           {<Rating readOnly value={item.rating} key={item.rating} />}
@@ -101,7 +137,13 @@ const MealsCard = ({ item }) => {
         <div className="mt-2 flex gap-20">
           <div className="flex items-center gap-2">
             <h1 className="text-blue-500 cursor-pointer">
-              <FaThumbsUp></FaThumbsUp>
+              <button
+                onClick={() => {
+                  handleLike(item._id);
+                }}
+              >
+                <FaThumbsUp></FaThumbsUp>
+              </button>
             </h1>
             <h1>
               {item.likes} {item.likes > 0 ? "Likes" : "Like"}{" "}

@@ -1,4 +1,4 @@
-import { FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import SectionTitle from "../../Components/Shared/SectionTitle";
 import Loading from "../../Others/Loading";
 import Swal from "sweetalert2";
@@ -67,7 +67,6 @@ const AdminUpcomingMeals = () => {
       }
     });
   };
-  
 
   if (loading) {
     return <Loading />;
@@ -102,7 +101,8 @@ const AdminUpcomingMeals = () => {
                 <th className="py-2 px-4 border text-center">Price</th>
                 <th className="py-2 px-4 border text-center">Email</th>
                 <th className="py-2 px-4 border text-center">Created At</th>
-                <th className="py-2 px-4 border text-center">Add To Meals</th>
+                <th className="py-2 px-4 border text-center">Add Meals</th>
+                <th className="py-2 px-4 border text-center">Update</th>
                 <th className="py-2 px-4 border text-center">Delete</th>
               </tr>
             </thead>
@@ -115,29 +115,41 @@ const AdminUpcomingMeals = () => {
                     <div className="flex items-center gap-3">
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
-                          <img
-                            src={m.image}
-                            alt="Meal"
-                          />
+                          <img src={m.image} alt="Meal" />
                         </div>
                       </div>
                     </div>
                   </td>
                   <td className="py-2 px-4 border text-center">{m.category}</td>
-                  <td className="py-2 px-4 border text-center">{m.description}</td>
+                  <td className="py-2 px-4 border text-center">
+                    {m.description}
+                  </td>
                   <td className="py-2 px-4 border text-center">{m.rating}</td>
                   <td className="py-2 px-4 border text-center">{m.likes}</td>
                   <td className="py-2 px-4 border text-center">{m.price}</td>
                   <td className="py-2 px-4 border text-center">{m.email}</td>
-                  <td className="py-2 px-4 border text-center">{format(new Date(m.createdAt), 'PPpp')}</td>
-                  <td className="text-2xl py-2 px-4 border text-center flex items-center justify-center text-green-600 cursor-pointer">
-                    <button onClick={() => handleTransferMeal(m)} className="btn">Add To Meals</button>
+                  <td className="py-2 px-4 border text-center">
+                    {format(new Date(m.createdAt), "PPpp")}
                   </td>
-                  <td
-                    onClick={() => handleDelete(m)}
-                    className="text-2xl text-red-600 cursor-pointer py-2 px-4 border text-center"
-                  >
-                    <FaTrash />
+                  <td className="text-2xl py-2 px-4 text-center  text-green-600 cursor-pointer">
+                    <button
+                      onClick={() => handleTransferMeal(m)}
+                      className="p-2 text-xs bg-blue-300 text-white  rounded hover:bg-blue-400"
+                    >
+                      Add Meals
+                    </button>
+                  </td>
+                  <td className="py-2 text-2xl text-green-500 px-4  border text-center">
+                    <button>
+                      <Link to={`/dashboard/UpdateUpcomingMeals/${m._id}`}>
+                        <FaEdit></FaEdit>
+                      </Link>
+                    </button>
+                  </td>
+                  <td className="text-2xl text-red-600  cursor-pointer py-2 px-4 text-center">
+                    <button onClick={() => handleDelete(m)}>
+                      <FaTrash />
+                    </button>
                   </td>
                 </tr>
               ))}

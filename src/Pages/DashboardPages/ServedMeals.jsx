@@ -24,7 +24,7 @@ const ServedMeals = () => {
         heading="Serving Meals"
         subHeading="Meals Are About to be served"
       ></SectionTitle>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto mt-10">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr className="bg-gray-100">
@@ -64,7 +64,7 @@ const ServedMeals = () => {
                 <td className="py-2 px-4 border text-center">{m.likes}</td>
                 <td className="py-2 px-4 border text-center">{m.price}</td>
                 <td className="py-2 px-4 border text-center">{m.email}</td>
-                <td className="py-2 px-4 border text-center">{m.ServingStatus}</td>
+                <td className={`py-2 px-4 border text-center ${m.ServingStatus === "Pending" ? 'text-red-500' : 'text-green-500'}`}>{m.ServingStatus}</td>
               </tr>
             ))}
           </tbody>

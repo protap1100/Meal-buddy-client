@@ -5,7 +5,7 @@ import Loading from "../../Others/Loading";
 import SectionTitle from "../../Components/Shared/SectionTitle";
 import MealsCategory from "./MealsCategory";
 
-const Meals = ({ limit, children }) => {
+const Meals = ({children }) => {
   const [meal, loading] = useMeals();
   const Breakfast = meal.filter((item) => item.category === "Breakfast");
   const Lunch = meal.filter((item) => item.category === "Lunch");
@@ -15,8 +15,8 @@ const Meals = ({ limit, children }) => {
     return <Loading/>;
   }
 
-  const displayedMeals = meal.slice(0, limit);
-  // console.log(meal);
+  const displayedMeals = meal.slice(0);
+  console.log(meal);
 
   return (
     <div>

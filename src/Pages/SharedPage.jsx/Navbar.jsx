@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import { FaShoppingBag, FaUser } from "react-icons/fa";
 import useUser from "../../Hooks/useUser";
 import useAdmin from "../../Hooks/useAdmin";
-import useCart from "../../Hooks/useCart";
+// import useCart from "../../Hooks/useCart";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { user, loading, logOut } = useAuth();
@@ -20,7 +20,7 @@ const Navbar = () => {
   // console.log(singleUser);
   const [isAdmin, adminLoading] = useAdmin();
   // console.log(isAdmin)
-  const [meal] = useCart();
+  // const [meal] = useCart();
 
   useEffect(() => {
     setOpen(false);
@@ -107,7 +107,7 @@ const Navbar = () => {
                 <div className="text-3xl mr-4 flex items-center justify-center relative">
                   <Link to="/userDashboard/cart" className="relative">
                     <span className="absolute -top-2 -right-3 bg-red-500 text-white rounded-full text-xs w-6 h-6 flex items-center justify-center">
-                      {meal.length}
+                      {/* {meal.length} */}
                     </span>
                     <FaShoppingBag />
                   </Link>

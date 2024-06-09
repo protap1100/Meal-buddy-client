@@ -86,7 +86,7 @@ const AdminNavbar = () => {
               : "mt-3 transition-all duration-700 ease-in-out  flex items-center gap-2 bg-orange-600  p-2  hover:bg-violet-100 border-b-2 border-black"
           }
         >
-          Server Meals
+          Served Meals
           <GiMeal></GiMeal> 
         </NavLink>
         <NavLink

@@ -29,6 +29,8 @@ import PrivateRouter from "./PrivateRouter";
 import AdminRouter from "./AdminRouter";
 import Payment from "../Pages/Payment/Payment";
 import CartPayment from "../Pages/UserDashBoard.jsx/Payment/CartPayment";
+import UpdateUpcomingMeals from "../Pages/DashboardPages/UpdateUpcomingMeals";
+import UpdateMeals from "../Pages/DashboardPages/UpdateMeals";
 
 export const router = createBrowserRouter([
   {
@@ -113,6 +115,14 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/addUpcomingMeals',
         element : <AddUpcomingMeals></AddUpcomingMeals>
+      },
+      {
+        path: '/dashboard/UpdateUpcomingMeals/:id',
+        element : <UpdateUpcomingMeals></UpdateUpcomingMeals>
+      },
+      {
+        path: '/dashboard/updateMeals/:id',
+        element : <UpdateMeals></UpdateMeals>
       },
     ],
   },
