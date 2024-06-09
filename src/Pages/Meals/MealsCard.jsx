@@ -14,7 +14,7 @@ const MealsCard = ({ item }) => {
   const { user } = useAuth();
   const [singleUser] = useUser();
   const [likeLoading, setLikeLoading] = useState(false);
-  console.log('hi')
+  // console.log('hi')
   // console.log(item)
   const handleRequestMeals = () => {
     // console.log(id)
