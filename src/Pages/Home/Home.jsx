@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import Membership from "../../Components/Membership/Membership";
 import Meals from "../Meals/Meals";
 import Banner from "./Banner";
+import Map from "../Map/Map";
+import Faq from "../Faq/Faq";
 
 const Home = () => {
   return (
@@ -16,6 +18,8 @@ const Home = () => {
         </Link>
       </Meals>
       <Membership></Membership>
+      <Map></Map>
+      <Faq></Faq>
     </div>
   );
 };

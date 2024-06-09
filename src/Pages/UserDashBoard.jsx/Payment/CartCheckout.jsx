@@ -15,7 +15,7 @@ const CheckoutForm = () => {
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const [cart, loading, refetch] = useCart();
+  const [cart, CartLoading, refetch] = useCart();
   const navigate = useNavigate();
 
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
@@ -95,7 +95,7 @@ const CheckoutForm = () => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Payment Successful for your meal",
+            title: "Payment Successful for your meal for deploying issue please don't reload the page for few seconds",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -105,7 +105,7 @@ const CheckoutForm = () => {
     }
   };
 
-  if (loading) {
+  if (CartLoading) {
     <Loading></Loading>;
   }
 

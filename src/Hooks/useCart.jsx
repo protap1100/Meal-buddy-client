@@ -8,7 +8,7 @@ const useCart = () => {
 
   const {
     data: meal = [],
-    isPending: loading,
+    isPending: CartLoading,
     refetch,
   } = useQuery({
     queryKey: ["meal"],
@@ -18,7 +18,7 @@ const useCart = () => {
     },
   });
 
-  return [meal, loading, refetch];
+  return [meal, CartLoading, refetch];
 };
 
 export default useCart;

@@ -20,7 +20,7 @@ const MealsCard = ({ item }) => {
     // console.log(id)
     // console.log(item);
 
-    if (singleUser?.badge === "") {
+    if (singleUser?.badge === "Bronze" || "") {
       Swal.fire({
         position: "top-center",
         icon: "error",

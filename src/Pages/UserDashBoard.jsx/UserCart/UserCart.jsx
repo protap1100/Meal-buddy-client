@@ -7,7 +7,7 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
 
 const UserCart = () => {
-  const [meal, loading, refetch] = useCart();
+  const [meal, CartLoading, refetch] = useCart();
   const axiosPublic = useAxiosPublic();
 
   // Function to calculate total price
@@ -45,7 +45,7 @@ const UserCart = () => {
     });
   };
 
-  if (loading) {
+  if (CartLoading) {
     return <Loading />;
   }
 

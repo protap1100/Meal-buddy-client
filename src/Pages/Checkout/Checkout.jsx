@@ -47,6 +47,7 @@ const Checkout = () => {
         <h1 className="text-2xl font-bold">{PackageDetails}</h1>
         <h1 className="text-xl">Expiration : {validity} Weeks</h1>
         <h1 className="text-xl">Price {price}$</h1>
+        <h1 className="text-red-600 text-center">N B:After Deploying into vercel it s taking time for successful payment please wait till you get<br />  the you already have that badge message or else payment will be canceled </h1>
         {singleUser?.badge === packageName ? (
           <>
             <h1>You Already Have That Badge</h1>

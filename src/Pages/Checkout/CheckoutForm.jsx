@@ -4,24 +4,23 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
-const CheckoutForm = ({ price,packageName }) => {
+const CheckoutForm = ({ price, packageName }) => {
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-  const {user} = useAuth();
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-//   console.log(price) 
+  //   console.log(price)
 
   useEffect(() => {
-    const res = axiosSecure.post("/create-payment-intent", { price: price })
-    .then(res=>{
-        console.log(res.data);
-        setClientSecret(res.data.clientSecret)
-    })
+    axiosSecure.post("/create-payment-intent", { price: price }).then((res) => {
+      console.log(res.data);
+      setClientSecret(res.data.clientSecret);
+    });
   }, [axiosSecure, price]);
-  console.log(clientSecret)
+  console.log(clientSecret);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -49,45 +48,43 @@ const CheckoutForm = ({ price,packageName }) => {
       setError("");
     }
 
-    // confirm payment 
-    const {paymentIntent, error : confirmError} =await stripe.confirmCardPayment(clientSecret,{
-        payment_method : {
-            card :card,
-            billing_details : {
-                email : user?.email || "anonymous",
-                name : user?.displayName  || "anonymous",
-            }
+    // confirm payment
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            email: user?.email || "anonymous",
+            name: user?.displayName || "anonymous",
+          },
+        },
+      });
 
-        }
-    })
-
-    if(confirmError){
-        console.log('confirm error')
-    }else{
-        console.log(paymentIntent, 'Payment Success')
-        if(paymentIntent.status === "succeeded"){
-            setTransactionId(paymentIntent.id);
-            Swal.fire({
-                text: 'Payment Successful',
-                icon: 'success'
-            })
-            // Saving Payment in Data Base
-            const payment = {
-                email : user?.email,
-                badge: packageName,
-                pack : 'Membership',
-                price: price,
-                status: 'paid',
-                transactionId: paymentIntent.id,
-                date: new Date(), 
-            }
-           const res = axiosSecure.patch('/payments',payment);
-           console.log(res);
-           window.location.reload();
-        }
+    if (confirmError) {
+      console.log("confirm error");
+    } else {
+      console.log(paymentIntent, "Payment Success");
+      if (paymentIntent.status === "succeeded") {
+        setTransactionId(paymentIntent.id);
+        Swal.fire({
+          text: "Payment Successful for deploying issue please don't reload the page for few seconds",
+          icon: "success",
+        });
+        // Saving Payment in Data Base
+        const payment = {
+          email: user?.email,
+          badge: packageName,
+          pack: "Membership",
+          price: price,
+          status: "paid",
+          transactionId: paymentIntent.id,
+          date: new Date(),
+        };
+        const res = axiosSecure.patch("/payments", payment);
+        console.log(res);
+        // window.location.reload();
+      }
     }
-
-
   };
 
   return (
@@ -117,7 +114,9 @@ const CheckoutForm = ({ price,packageName }) => {
           Pay
         </button>
         <p className="text-red-600">{error} </p>
-          {transactionId && <p className="text-green-600">Your Transaction Id :{transactionId}</p>}
+        {transactionId && (
+          <p className="text-green-600">Your Transaction Id :{transactionId}</p>
+        )}
       </form>
     </div>
   );

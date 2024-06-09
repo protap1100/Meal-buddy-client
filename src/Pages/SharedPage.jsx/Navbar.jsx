@@ -106,7 +106,7 @@ const Navbar = () => {
               <>
                 <div className="text-3xl mr-4 flex items-center justify-center relative">
                   <Link to="/userDashboard/cart" className="relative">
-                    <span className="absolute -top-2 -right-3 bg-red-500 text-white rounded-full text-xs w-6 h-6 flex items-center justify-center">
+                    <span className="absolute -top-2 -right-3  text-white rounded-full text-xs w-6 h-6 flex items-center justify-center">
                       {/* {meal.length} */}
                     </span>
                     <FaShoppingBag />
