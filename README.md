@@ -1,8 +1,9 @@
 # Student Meal Ordering Service
 
 Welcome to the Student Meal Ordering Service! This platform is designed to make meal ordering quick, easy, and convenient for students.
-
+Live Link
 [MealBuddy](https://mealbuddy-80bc1.web.app/) </br>
+Server Site Code
 [Server Site Code](https://github.com/programming-hero-web-course1/b9a12-server-side-protap1100)
 
 ## Features
@@ -43,9 +44,6 @@ Users can view their complete payment history and see how much they have spent o
 ### User Spending Insights
 In addition to viewing payment history, users can also see insights into their spending habits on the platform. Track how much you spend monthly or weekly, and adjust your budget accordingly. Our insights feature provides a detailed breakdown of your expenditures.
 
-### Live Link
-Check out our live website to explore all these features in action: 
-
 ## Technologies Used
 
 This project is built using the following technologies:
@@ -58,6 +56,7 @@ This project is built using the following technologies:
 - **CSS:** Custom styles to complement Tailwind CSS and enhance the UI.
 - **Firebase Authentication:** For secure user authentication.
 - **Stripe:** For secure payment processing.
+- **Jwt:"" Jwt Authentication For Securing Admin Panel and User.
 
 ## Additional Information
 
