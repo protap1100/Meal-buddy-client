@@ -13,40 +13,48 @@ const UpcomingMealsCard = ({ item }) => {
   // Handling Like
 
   const handleLike = (item) => {
-    if (singleUser?.badge === "Bronze") {
+    if (!singleUser?.name) {
+      console.log("nam nai");
       Swal.fire({
         icon: "error",
-        text: "Buy Membership To Give Likes",
+        text: "Please Login To Give Like",
       });
     } else {
-      setLikeLoading(true);
-      const userId = singleUser?._id;
-      axiosPublic
-        .patch(`/upcomingLikes/${item._id}`, { userId })
-        .then((res) => {
-          if (res.data.modifiedCount > 0) {
-            Swal.fire({
-              icon: "success",
-              text: "Like Added",
-            });
-          } else {
-            Swal.fire({
-              icon: "info",
-              text: "You have already liked this meal",
-            });
-          }
-          setLikeLoading(false);
-        })
-        .catch((error) => {
-          console.log(error.response.data.message);
-          Swal.fire({
-            icon: "error",
-            text:
-              error.response.data.message ||
-              "Something went wrong. Please try again later.",
-          });
-          setLikeLoading(false);
+      if (singleUser?.badge === "Bronze") {
+        Swal.fire({
+          icon: "error",
+          text: "Buy Membership To Give Likes",
         });
+      } else {
+        setLikeLoading(true);
+        const userId = singleUser?._id;
+        axiosPublic
+          .patch(`/upcomingLikes/${item._id}`, { userId })
+          .then((res) => {
+            if (res.data.modifiedCount > 0) {
+              Swal.fire({
+                icon: "success",
+                text: "Like Added Reload the page it will update",
+              });
+            } else {
+              Swal.fire({
+                icon: "info",
+                text: "You have already liked this meal",
+              });
+            }
+            setLikeLoading(false);
+          })
+          .catch((error) => {
+            console.log(error.response.data.message);
+            Swal.fire({
+              icon: "error",
+              text:
+                error.response.data.message ||
+                "Something went wrong. Please try again later.",
+            });
+            setLikeLoading(false);
+          });
+      }
     }
   };
 

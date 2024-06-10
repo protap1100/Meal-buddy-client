@@ -16,10 +16,10 @@ const Banner = () => {
           <div key={index} className="relative">
             <img src={img} alt={`Slide ${index + 1}`} />
             <div className="absolute inset-0 flex flex-col items-center justify-center space-y-2">
-              <h2 className="text-white text-xl lg:text-4xl font-bold bg-black bg-opacity-50 p-4 rounded">
+              <h2 className="text-white text-xs lg:text-4xl font-bold bg-black bg-opacity-50 p-4 rounded">
                 Search Your Favorite Food
               </h2>
-              <h2 className="text-white lg:text-lg text-xs w-1/3 font-bold bg-black bg-opacity-50 p-4 rounded">
+              <h2 className="text-white lg:text-lg text-xs w-full lg:w-1/3 font-bold bg-black bg-opacity-50 p-4 rounded">
                 Discover Delicious Meals: Search and buy your favorite dishes
                 effortlessly. Enjoy a wide variety of mouth-watering options
                 delivered straight to your door. Your next meal is just a click

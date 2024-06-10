@@ -56,7 +56,7 @@ const MealsDetails = () => {
       title: title,
       image: image,
       category: category,
-      price:price,
+      price: price,
     };
     const review = await axiosPublic.post("/review", reviewData);
     console.log(review);
@@ -84,7 +84,7 @@ const MealsDetails = () => {
       });
     } else {
       const servedMeals = {
-        id : singleUser._id,
+        id: singleUser._id,
         title: title,
         image: image,
         category: category,
@@ -98,7 +98,7 @@ const MealsDetails = () => {
         email: user?.email,
       };
       axiosPublic.post("/servedMeals", servedMeals).then((res) => {
-        console.log(res)
+        console.log(res);
         if (res.data.insertedId) {
           Swal.fire({
             position: "top-center",
@@ -114,35 +114,43 @@ const MealsDetails = () => {
 
   // Handling Like
   const handleLike = (id) => {
-    console.log(_id)
-    setLikeLoading(true);
-    const userId = _id; 
-    axiosPublic
-      .patch(`/likes/${id}`, { userId })
-      .then((res) => {
-        if (res.data.modifiedCount > 0) {
-          Swal.fire({
-            icon: "success",
-            text: "Like Added",
-          });
-        } else {
-          Swal.fire({
-            icon: "info",
-            text: "You have already liked this meal",
-          });
-        }
-        setLikeLoading(false);
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.message || "Something went wrong. Please try again later.",
-        });
-        setLikeLoading(false);
+    if (!singleUser?.name) {
+      console.log("nam nai");
+      Swal.fire({
+        icon: "error",
+        text: "Please Login To Give Like",
       });
+    } else {
+      setLikeLoading(true);
+      const userId = _id;
+      axiosPublic
+        .patch(`/likes/${id}`, { userId })
+        .then((res) => {
+          if (res.data.modifiedCount > 0) {
+            Swal.fire({
+              icon: "success",
+              text: "Like Added Reload the page it will update",
+            });
+          } else {
+            Swal.fire({
+              icon: "info",
+              text: "You have already liked this meal",
+            });
+          }
+          setLikeLoading(false);
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+          Swal.fire({
+            icon: "error",
+            text:
+              error.response.data.message ||
+              "Something went wrong. Please try again later.",
+          });
+          setLikeLoading(false);
+        });
+    }
   };
-  
 
   // getting reviews According meal id
   const { data: reviewsData = [], isLoading: loading2 } = useQuery({
@@ -155,7 +163,7 @@ const MealsDetails = () => {
     },
   });
 
-  if (loading || loading2  || likeLoading) {
+  if (loading || loading2 || likeLoading) {
     return <Loading />;
   }
   const {

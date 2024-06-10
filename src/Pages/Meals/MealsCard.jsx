@@ -71,38 +71,46 @@ const MealsCard = ({ item }) => {
       return res.data;
     },
   });
-
+  // console.log(singleUser?.name ? 'name ache' : 'nam nai')
   // Handling Like
   const handleLike = (id) => {
-    console.log(singleUser?._id);
-    setLikeLoading(true);
-    const userId = singleUser?._id;
-    axiosPublic
-      .patch(`/likes/${id}`, { userId })
-      .then((res) => {
-        if (res.data.modifiedCount > 0) {
-          Swal.fire({
-            icon: "success",
-            text: "Like Added",
-          });
-        } else {
-          Swal.fire({
-            icon: "info",
-            text: "You have already liked this meal",
-          });
-        }
-        setLikeLoading(false);
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-        Swal.fire({
-          icon: "error",
-          text:
-            error.response.data.message ||
-            "Something went wrong. Please try again later.",
-        });
-        setLikeLoading(false);
+    if (!singleUser?.name) {
+      console.log('nam nai')
+      Swal.fire({
+        icon: "error",
+        text: "Please Login To Give Like",
       });
+    } else {
+      console.log('nam ache')
+      setLikeLoading(true);
+      const userId = singleUser?._id;
+      axiosPublic
+        .patch(`/likes/${id}`, { userId })
+        .then((res) => {
+          if (res.data.modifiedCount > 0) {
+            Swal.fire({
+              icon: "success",
+              text: "Like Added Reload the page it will update",
+            });
+          } else {
+            Swal.fire({
+              icon: "info",
+              text: "You have already liked this meal",
+            });
+          }
+          setLikeLoading(false);
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+          Swal.fire({
+            icon: "error",
+            text:
+              error.response.data.message ||
+              "Something went wrong. Please try again later.",
+          });
+          setLikeLoading(false);
+        });
+    }
   };
 
   // console.log(reviewsData)
