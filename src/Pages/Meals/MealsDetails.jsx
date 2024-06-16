@@ -193,10 +193,10 @@ const MealsDetails = () => {
             : category === "Lunch"
             ? "bg-blue-100"
             : "bg-red-100"
-        } p-10 mt-5 rounded flex w-[900px] items-center mx-auto justify-center`}
+        } p-10 mt-5 rounded flex lg:w-3/4 w-full  flex-col lg:flex-row items-center mx-auto justify-center`}
       >
-        <div className="">
-          <div className="relative w-3/4 bg-white  rounded">
+        <div className="flex flex-col  lg:items-left justify-center items-center">
+          <div className="relative w-full lg:w-3/4 bg-white  rounded">
             <img className="w-full h-80 rounded" src={image} alt="" />
             <h1 className="bg-black text-white p-2 rounded-xl absolute top-2 right-2">
               {price}
@@ -208,7 +208,7 @@ const MealsDetails = () => {
               <h1 className="text-xl">{category}</h1>
             </div>
           </div>
-          <div className="text-left w-4/5">
+          <div className="text-left w-full lg:w-4/5">
             <div className="mt-2 flex gap-20">
               <div className="flex items-center gap-2">
                 <button
@@ -273,7 +273,7 @@ const MealsDetails = () => {
           </div>
         </div>
         <form
-          className="max-w-md  w-2/3 mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg"
+          className="max-w-md  lg:w-2/3 w-full mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="mb-4">
@@ -353,7 +353,7 @@ const MealsDetails = () => {
           </button>
         </form>
       </div>
-      <div className="w-[900px] mx-auto my-5 space-y-2">
+      <div className="lg:w-3/4 w-full mx-auto my-5 space-y-2">
         <h1 className="text-center text-2xl font-bold">
           User Reaction About This Food
           <p>Total Reviews:{reviewsData.length}</p>
