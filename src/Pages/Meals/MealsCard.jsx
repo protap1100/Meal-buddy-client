@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Others/Loading";
 import useUser from "../../Hooks/useUser";
 import { useState } from "react";
-const MealsCard = ({ item }) => {
+const MealsCard = ({ item, }) => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
   const [singleUser] = useUser();

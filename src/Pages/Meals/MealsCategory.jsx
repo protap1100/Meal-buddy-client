@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MealsCard from "./MealsCard";
 
-const MealsCategory = ({ items }) => {
+const MealsCategory = ({ items,refetch }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
@@ -19,7 +19,7 @@ const MealsCategory = ({ items }) => {
     <div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10">
         {currentItems.map((item) => (
-          <MealsCard key={item._id} item={item} />
+          <MealsCard key={item._id} refetch={refetch} item={item} />
         ))}
       </div>
       <div className="flex justify-center mt-10 space-x-2">

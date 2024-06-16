@@ -8,7 +8,7 @@ import { useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Meals = ({ children }) => {
-  const [meals, loading] = useMeals();
+  const [meals, loading, refetch] = useMeals();
   const [name, setName] = useState("");
   const [filteredMeals, setFilteredMeals] = useState([]);
   const [loading2, setLoading2] = useState(false);
@@ -112,15 +112,18 @@ const Meals = ({ children }) => {
               items={displayedMeals.filter(
                 (item) => item.category === "Breakfast"
               )}
+              refetch={refetch}
             />
           </TabPanel>
           <TabPanel>
             <MealsCategory
+              refetch={refetch}
               items={displayedMeals.filter((item) => item.category === "Lunch")}
             />
           </TabPanel>
           <TabPanel>
             <MealsCategory
+              refetch={refetch}
               items={displayedMeals.filter(
                 (item) => item.category === "Dinner"
               )}

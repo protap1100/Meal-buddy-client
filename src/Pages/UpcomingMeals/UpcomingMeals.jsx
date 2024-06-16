@@ -4,7 +4,7 @@ import Loading from "../../Others/Loading";
 import UpcomingMealsCard from "./UpcomingMealsCard";
 
 const UpcomingMeals = () => {
-  const [upcomingMeal, loading, ,] = useUpcomingMeals();
+  const [upcomingMeal, loading, refetch] = useUpcomingMeals();
 
   if (loading) {
     return <Loading></Loading>;
@@ -17,7 +17,7 @@ const UpcomingMeals = () => {
       ></SectionTitle>
       <div className="grid lg:grid-cols-3 grid-cols-1 md-grid-cols-2 gap-5 ">
         {
-            upcomingMeal.map(item =><UpcomingMealsCard key={item._id} item={item}></UpcomingMealsCard>)
+            upcomingMeal.map(item =><UpcomingMealsCard key={item._id} refetch={refetch} item={item}></UpcomingMealsCard>)
         }
       </div>
     </div>

@@ -6,7 +6,7 @@ import Loading from "../../Others/Loading";
 import Swal from "sweetalert2";
 import { useState } from "react";
 
-const UpcomingMealsCard = ({ item }) => {
+const UpcomingMealsCard = ({ item,refetch }) => {
   const [likeLoading, setLikeLoading] = useState(false);
   const axiosPublic = useAxiosPublic();
   const [singleUser] = useUser();
@@ -32,6 +32,7 @@ const UpcomingMealsCard = ({ item }) => {
           .patch(`/upcomingLikes/${item._id}`, { userId })
           .then((res) => {
             if (res.data.modifiedCount > 0) {
+              refetch();
               Swal.fire({
                 icon: "success",
                 text: "Like Added Reload the page it will update",
