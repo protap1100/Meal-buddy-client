@@ -47,14 +47,6 @@ const ContactUs = () => {
 
   return (
     <>
-      {/* <Helmet>
-        <link
-          rel="icon"
-          type="image/png"
-          href="/src/assets/images/titleIcon/contact.png"
-        />
-        <title>Contact Us</title>
-      </Helmet> */}
       <SectionTitle
         heading="Get in Touch"
         subHeading="Get in touch with us! Fill out the form below for personalized
